@@ -1,7 +1,7 @@
 import { sourceCodePro, orbitron } from "../fonts";
 import { CenterLayout } from "../components/Layouts";
 
-const DataDescription = ({ children }) => (
+const DataDescription = ({ children }: { children: any }) => (
   <dd className={sourceCodePro.className}>{children}</dd>
 );
 
