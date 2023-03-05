@@ -1,12 +1,12 @@
 import { Navigation } from "../components/Nav";
 
-import { centerLayout, mainColumn } from "./styles/layouts.module.css";
+import styles from "./styles/layouts.module.css";
 
 export const CenterLayout = ({ children }) => {
   return (
-    <div className={centerLayout}>
+    <div className={styles.centerLayout}>
       <Navigation />
-      <div className={mainColumn}>{children}</div>
+      <div className={styles.mainColumn}>{children}</div>
     </div>
   );
 };
