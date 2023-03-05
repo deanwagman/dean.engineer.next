@@ -7,12 +7,14 @@ import classNames from "classnames";
 import { orbitron } from "../fonts";
 import navStyles from "../nav.module.css";
 
+const breakPoint = 1200;
+
 export const Navigation = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const onClick = () => setIsExpanded(!isExpanded);
 
   useEffect(() => {
-    if (isExpanded) {
+    if (isExpanded && window.innerWidth <= breakPoint) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -21,7 +23,7 @@ export const Navigation = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 1200) {
+      if (window.innerWidth > breakPoint) {
         setIsExpanded(true);
       } else {
         setIsExpanded(false);
