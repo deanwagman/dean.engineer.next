@@ -1,0 +1,26 @@
+.centerLayout {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: no-wrap;
+}
+
+.mainColumn {
+  display: flex;
+  min-height: calc(100vh - 2rem); /* I hate how we have to do this */
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .mainColumn {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .mainColumn {
+    padding-left: 1.68rem;
+    padding-right: 1.68rem;
+  }
+}
