@@ -55,7 +55,9 @@ const reset = () => {
 
 const render = () => {
   const canvas = document.getElementById(id);
-  if (!canvas) return;
+  console.log({ canvas });
+
+  if (!canvas) return setTimeout(render, 100);
   const context = canvas.getContext("2d");
 
   snake = moveSnake({ snake, direction });
@@ -92,7 +94,7 @@ const renderLoop = () => {
 };
 
 export default () => {
-  useEffect(() => renderLoop, []);
+  useEffect(() => renderLoop(), []);
   useEffect(() => {
     window.addEventListener("keydown", ({ key }) => {
       if (gameOver) {
