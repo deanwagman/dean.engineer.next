@@ -47,8 +47,8 @@ const containerStyles = {
 
 const reset = () => {
   gameOver = false;
-  score = 0;
   highScore = Math.max(score, highScore);
+  score = 0;
   snake = [startVector];
   isPointerDown = false;
 };
