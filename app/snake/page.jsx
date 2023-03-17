@@ -1,4 +1,3 @@
-// @ts-nocheck
 "use client";
 
 import { useEffect, useState } from "react";
@@ -57,7 +56,7 @@ const reset = () => {
 const render = () => {
   const canvas = document.getElementById(id);
   if (!canvas) return;
-  const context = canvas.getContext("2d")!;
+  const context = canvas.getContext("2d");
 
   snake = moveSnake({ snake, direction });
 
