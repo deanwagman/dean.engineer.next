@@ -55,9 +55,8 @@ const reset = () => {
 
 const render = () => {
   const canvas = document.getElementById(id);
-  console.log({ canvas });
 
-  if (!canvas) return setTimeout(render, 100);
+  if (!canvas) return setTimeout(render, 1000);
   const context = canvas.getContext("2d");
 
   snake = moveSnake({ snake, direction });
