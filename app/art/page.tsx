@@ -1,4 +1,5 @@
 import { CenterLayout } from "../components/Layouts";
+import ImageGallery from "../components/ImageGallery";
 import { orbitron } from "../fonts";
 
 export default () => (
@@ -20,5 +21,7 @@ export default () => (
         expanded beyond what we ever thought possible.
       </p>
     </article>
+
+    <ImageGallery />
   </CenterLayout>
 );

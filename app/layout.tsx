@@ -17,7 +17,7 @@ export default function RootLayout({
       */}
       <head />
       <body>
-        <svg style={{ width: 0, height: 0 }}>
+        <svg style={{ width: 0, height: 0, display: "none" }}>
           <defs>
             <filter id="plasma">
               <feTurbulence baseFrequency="0.009" numOctaves="5" seed="2">
@@ -57,6 +57,8 @@ export default function RootLayout({
         </svg>
 
         {children}
+
+        <div id="modal-root" />
       </body>
     </html>
   );
