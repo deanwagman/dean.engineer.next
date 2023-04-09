@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSpring, animated, config } from "@react-spring/web";
 import Link from "next/link";
 import Image from "next/image";
 import classNames from "classnames";
@@ -10,16 +11,13 @@ import navStyles from "../nav.module.css";
 const breakPoint = 1200;
 
 export const Navigation = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   const onClick = () => setIsExpanded(!isExpanded);
 
-  useEffect(() => {
-    if (isExpanded && window.innerWidth <= breakPoint) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [isExpanded]);
+  const navSpringProps = useSpring({
+    transform: `translateX(${isExpanded ? 0 : -100}%)`,
+    config: { ...config.gentle, clamp: true },
+  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -51,11 +49,9 @@ export const Navigation = () => {
         <rect y="60" width="100" height="20"></rect>
       </svg>
 
-      <nav
-        className={classNames(
-          navStyles.container,
-          isExpanded && navStyles.expanded
-        )}
+      <animated.nav
+        className={classNames(navStyles.container)}
+        style={navSpringProps}
       >
         <Link href="/" className={navStyles.logoContainer}>
           <img src="/dean-logo.png" alt="Logo" className={navStyles.logo} />
@@ -72,12 +68,11 @@ export const Navigation = () => {
               Resume
             </Link>
           </li>
-          {/* Coming Soon */}
-          {/* <li className={navStyles.item}>
-          <Link href="/art" className={classNames(orbitron.className)}>
-            Art
-          </Link>
-        </li> */}
+          <li className={navStyles.item}>
+            <Link href="/art" className={classNames(orbitron.className)}>
+              Art
+            </Link>
+          </li>
           <li className={navStyles.item}>
             <Link href="/blog" className={classNames(orbitron.className)}>
               Blog
@@ -89,7 +84,7 @@ export const Navigation = () => {
             </Link>
           </li>
         </ul>
-      </nav>
+      </animated.nav>
     </>
   );
 };

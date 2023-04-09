@@ -9,10 +9,10 @@ const LightBox = ({ image, onClose, nodeRef, tileRef, show }) => {
   const [imageSpringProps, imageSpringAPI] = useSpring(
     () => ({
       from: {
-        x: getRect(tileRef).x,
-        y: getRect(tileRef).y,
-        width: getRect(tileRef).width,
-        height: getRect(tileRef).height,
+        x: getRect(tileRef)?.x || 0,
+        y: getRect(tileRef)?.y || 0,
+        width: getRect(tileRef)?.width || 0,
+        height: getRect(tileRef)?.height || 0,
       },
       config: config.gentle,
     }),
@@ -29,6 +29,8 @@ const LightBox = ({ image, onClose, nodeRef, tileRef, show }) => {
   );
 
   useEffect(() => {
+    if (!tileRef.current) return;
+
     const tileX = getRect(tileRef).x;
     const tileY = getRect(tileRef).y;
     const tileWidth = getRect(tileRef).width;
@@ -101,8 +103,12 @@ const LightBox = ({ image, onClose, nodeRef, tileRef, show }) => {
       <button className={styles["close-button"]} onClick={prepareForClose}>
         &times;
       </button>
+
+      {/* TODO: Add image title and description */}
+      {/* <h1 className={styles["image-title"]}>{image?.name}</h1>
+      <p className={styles["image-description"]}>{image?.description}</p> */}
       <animated.img
-        src={image?.url}
+        src={image?.src}
         alt={image?.description}
         className={styles["hero-image"]}
         style={imageSpringProps}
