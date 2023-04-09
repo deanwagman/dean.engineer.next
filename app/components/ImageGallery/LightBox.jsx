@@ -1,3 +1,4 @@
+"use-client";
 import React, { useLayoutEffect, useEffect, useRef } from "react";
 import { useSpring, animated, config } from "@react-spring/web";
 import ReactDOM from "react-dom";
