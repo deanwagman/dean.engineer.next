@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
+import { useSpring, animated } from "@react-spring/web";
 import Image from "next/image";
 import LightBox from "./LightBox";
 
@@ -84,13 +85,30 @@ const data = {
 };
 
 const ImageTile = ({ url, description, onClick }) => {
+  const [imageTileSpringProps, imageTileSpring] = useSpring(() => ({
+    scale: 1,
+    config: { mass: 1, tension: 200, friction: 20 },
+  }));
+  const mouseEnter = () => imageTileSpring.start({ scale: 1.1 });
+  const mouseLeave = () => imageTileSpring.start({ scale: 1 });
   return (
     <div>
-      <img
+      <animated.img
         src={url}
         alt={description}
         className={styles.thumbnail}
         onClick={onClick}
+        onMouseEnter={mouseEnter}
+        onMouseLeave={mouseLeave}
+        style={{
+          ...imageTileSpringProps,
+          boxShadow: imageTileSpringProps.scale.to(
+            (value) =>
+              `rgba(0px 0px ${Math.round(value * 6)}px ${Math.round(
+                value * 2
+              )}px rgba(0,0,0,0.75))`
+          ),
+        }}
       />
     </div>
   );
@@ -102,8 +120,6 @@ export default () => {
   const [selectedImage, setSelectedImage] = useState(data.images[0]);
   const lightBoxRef = useRef(null);
   const tileRef = useRef(null); // Ref for the image tile, used for the transition
-
-  console.log({ showLightBox });
 
   return (
     <div className={styles.container}>

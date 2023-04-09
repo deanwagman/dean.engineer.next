@@ -14,7 +14,7 @@ const LightBox = ({ image, onClose, nodeRef, tileRef, show }) => {
         width: getRect(tileRef).width,
         height: getRect(tileRef).height,
       },
-      config: config.stiff,
+      config: config.gentle,
     }),
     [tileRef]
   );

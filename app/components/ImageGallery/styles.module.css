@@ -1,9 +1,9 @@
 .container {
-  width: 60%;
+  width: 65%;
   height: 100%;
   margin: auto;
 
-  column-count: 3; /* Adjust the number of columns as needed */
+  column-count: 8; /* Adjust the number of columns as needed */
   column-gap: 2em; /* Adjust the gap between columns */
   max-width: 100%;
 
@@ -13,19 +13,53 @@
   border-radius: 10px;
 }
 
+@media screen and (max-width: 2200px) {
+  .container {
+    column-count: 6;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .container {
+    column-count: 5;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .container {
+    column-count: 4;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    column-count: 3;
+    width: 86%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    column-count: 2;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    column-count: 1;
+    width: 100%;
+  }
+}
+
 .thumbnail {
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   width: 100%;
   max-width: 100%;
   margin-bottom: 2em;
-  transition: transform 1s ease-in-out;
-  transition-delay: 0.5s;
-  transform: scale(1);
 }
 
 .thumbnail:hover {
-  transform: scale(1.1);
   cursor: pointer;
 }
 
