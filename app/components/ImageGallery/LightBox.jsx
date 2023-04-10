@@ -122,8 +122,12 @@ const LightBox = ({ image, onClose, nodeRef, tileRef, show }) => {
 };
 
 const Modal = (props) => {
+  if (typeof window == "undefined") {
+    return null;
+  }
+
   // Get the DOM element where you want to render the portal content
-  const portalRoot = document?.getElementById("modal-root");
+  const portalRoot = window?.document?.getElementById("modal-root");
 
   if (!portalRoot) {
     return null;
