@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useDrag } from "@use-gesture/react";
 import {
   checkCollisionWall,
   checkCollisionFood,
@@ -118,8 +119,30 @@ export default () => {
     });
   }, []);
 
+  const bind = useDrag(({ swipe: [swipeX, swipeY] }) => {
+    if (gameOver) {
+      reset();
+      return;
+    }
+
+    const { x, y } = direction;
+    let newDirection = { x, y };
+
+    if (swipeX === -1) {
+      newDirection = { x: -gridUnit, y: 0 };
+    } else if (swipeX === 1) {
+      newDirection = { x: gridUnit, y: 0 };
+    } else if (swipeY === -1) {
+      newDirection = { x: 0, y: -gridUnit };
+    } else if (swipeY === 1) {
+      newDirection = { x: 0, y: gridUnit };
+    }
+
+    direction = newDirection;
+  });
+
   return (
-    <div style={containerStyles}>
+    <div {...bind()} style={containerStyles}>
       <canvas
         id={id}
         width="600"

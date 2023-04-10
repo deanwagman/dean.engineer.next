@@ -1,6 +1,7 @@
 "use-client";
 import React, { useLayoutEffect, useEffect, useRef } from "react";
 import { useSpring, animated, config } from "@react-spring/web";
+import Image from "next/image";
 import ReactDOM from "react-dom";
 import styles from "./styles.module.css";
 

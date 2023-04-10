@@ -12,8 +12,10 @@ const ImageTile = ({ url, description, onClick }) => {
     scale: 1,
     config: { mass: 1, tension: 200, friction: 20 },
   }));
+
   const mouseEnter = () => imageTileSpring.start({ scale: 1.1 });
   const mouseLeave = () => imageTileSpring.start({ scale: 1 });
+
   return (
     <div>
       <animated.img
@@ -23,6 +25,7 @@ const ImageTile = ({ url, description, onClick }) => {
         onClick={onClick}
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
+        loading="auto"
         style={{
           ...imageTileSpringProps,
           boxShadow: imageTileSpringProps.scale.to(
@@ -32,6 +35,7 @@ const ImageTile = ({ url, description, onClick }) => {
               )}px rgba(0,0,0,0.75))`
           ),
         }}
+        {...bind()}
       />
     </div>
   );
