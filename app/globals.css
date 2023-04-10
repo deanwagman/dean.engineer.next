@@ -77,7 +77,6 @@ article::before {
   z-index: -1;
 
   filter: url("#plasma") blur(2px);
-  mix-blend-mode: difference;
 }
 
 /* Headlines */
