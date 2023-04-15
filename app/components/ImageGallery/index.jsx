@@ -35,7 +35,6 @@ const ImageTile = ({ url, description, onClick }) => {
               )}px rgba(0,0,0,0.75))`
           ),
         }}
-        {...bind()}
       />
     </div>
   );

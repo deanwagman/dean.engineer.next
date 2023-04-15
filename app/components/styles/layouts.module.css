@@ -6,9 +6,9 @@
 
 .mainColumn {
   display: flex;
-  min-height: calc(100vh - 2rem); /* I hate how we have to do this */
+  max-height: 100vh;
+  overflow-y: auto;
   flex-direction: column;
-  justify-content: center;
 }
 
 @media screen and (max-width: 1200px) {
