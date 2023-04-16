@@ -24,7 +24,7 @@ const CameraOrbitController = () => {
   return null;
 };
 
-export default () => {
+const Main = () => {
   return (
     <Canvas style={{ background: "black" }}>
       <CameraOrbitController />
@@ -41,3 +41,5 @@ export default () => {
     </Canvas>
   );
 };
+
+export default Main;

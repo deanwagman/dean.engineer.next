@@ -5,7 +5,7 @@ import OrbitPath from "../OrbitPath";
 import { scaleDistance } from "../util";
 import { sun, mercury } from "../constants";
 
-export default () => {
+const Sun = () => {
   const map = useLoader(TextureLoader, sun.texture);
   const emissiveMap = useLoader(TextureLoader, sun.emissiveTexture);
   const meshRef = useRef();
@@ -28,3 +28,5 @@ export default () => {
     </mesh>
   );
 };
+
+export default Sun;

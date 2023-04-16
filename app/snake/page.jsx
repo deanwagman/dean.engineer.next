@@ -55,6 +55,10 @@ const reset = () => {
 };
 
 const render = () => {
+  if (typeof window == "undefined") {
+    return null;
+  }
+
   const canvas = document.getElementById(id);
 
   if (!canvas) return setTimeout(render, 1000);
@@ -93,7 +97,7 @@ const renderLoop = () => {
   setTimeout(renderLoop, speed);
 };
 
-export default () => {
+const Page = () => {
   useEffect(() => renderLoop(), []);
   useEffect(() => {
     window.addEventListener("keydown", ({ key }) => {
@@ -207,3 +211,5 @@ export default () => {
     </div>
   );
 };
+
+export default Page;

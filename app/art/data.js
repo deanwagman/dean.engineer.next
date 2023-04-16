@@ -36,7 +36,7 @@ import web3 from "./images/web-3.png";
 import web4 from "./images/web-4.png";
 import zoobooks from "./images/zoobooks.png";
 
-export default {
+const data = {
   name: "AI Art Gallery",
   description: "AI Art Gallery",
   images: [
@@ -101,3 +101,5 @@ export default {
     { src: zoobooks.src, name: "Zoobooks" },
   ],
 };
+
+export default data;

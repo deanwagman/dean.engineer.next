@@ -8,8 +8,6 @@ import { PlaneBufferGeometry, MeshBasicMaterial, Mesh, Fog } from "three";
 import Platform from "./Platform";
 import styles from "./styles.module.css";
 
-// const AnimatedPlane = animated(Plane);
-
 const CameraOrbitController = () => {
   const { camera, gl } = useThree();
 

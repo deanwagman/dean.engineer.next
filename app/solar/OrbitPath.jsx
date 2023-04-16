@@ -2,7 +2,7 @@ import React from "react";
 import { Vector3, BufferGeometry } from "three";
 import { scaleDistance } from "./util";
 
-export default ({ semiMajorAxis, eccentricity, color }) => {
+const OrbitPath = ({ semiMajorAxis, eccentricity, color }) => {
   const points = [];
 
   const numPoints = 1000;
@@ -33,3 +33,5 @@ export default ({ semiMajorAxis, eccentricity, color }) => {
     </mesh>
   );
 };
+
+export default OrbitPath;

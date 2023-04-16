@@ -1,6 +1,6 @@
 import { CenterLayout } from "../components/Layouts";
 
-export default () => {
+const Page = () => {
   return (
     <CenterLayout>
       <article>
@@ -10,11 +10,11 @@ export default () => {
 
         <p>
           React is a popular JavaScript library for building user interfaces.
-          With its component-based architecture, it's easy to create reusable
-          and modular code. However, as your application grows, it's important
-          to ensure that your React components are scalable and maintainable. In
-          this post, we'll explore some best practices for writing scalable
-          React components.
+          With its component-based architecture, it&rsquo;s easy to create
+          reusable and modular code. However, as your application grows,
+          it&rsquo;s important to ensure that your React components are scalable
+          and maintainable. In this post, we&rsquo;ll explore some best
+          practices for writing scalable React components.
         </p>
 
         <ol>
@@ -22,9 +22,9 @@ export default () => {
             Keep Components Simple and Focused
             <br />
             Each React component should have a single responsibility and should
-            do that responsibility well. Don't try to build complex components
-            that do too many things. Instead, break your UI down into smaller,
-            simpler components that can be easily composed together.
+            do that responsibility well. Don&rsquo;t try to build complex
+            components that do too many things. Instead, break your UI down into
+            smaller, simpler components that can be easily composed together.
           </li>
           <li>
             Use Props to Pass Data and Functions
@@ -39,8 +39,8 @@ export default () => {
             <br />
             React has a built-in optimization called Pure Components. These
             components only re-render when their props or state change. If a
-            component doesn't need to re-render on every update, make it a Pure
-            Component to improve performance.
+            component doesn&rsquo;t need to re-render on every update, make it a
+            Pure Component to improve performance.
           </li>
           <li>
             Write Reusable and Flexible Code
@@ -73,3 +73,5 @@ export default () => {
     </CenterLayout>
   );
 };
+
+export default Page;

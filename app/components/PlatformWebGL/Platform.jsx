@@ -5,9 +5,9 @@ import { Plane } from "@react-three/drei";
 import { NoiseTexture, TextureLoader } from "three";
 
 const numPlatforms = 100;
-const noiseTexture = new TextureLoader().load("/textures/grunge.png");
 
 const Platforms = ({ index: i }) => {
+  const noiseTexture = useLoader(TextureLoader, "/textures/grunge.png");
   const [springs] = useSprings(
     numPlatforms,
     (index) => {

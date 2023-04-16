@@ -5,7 +5,7 @@ import { useKeplerOrbit } from "../hooks";
 import { scaleDistance } from "../util";
 import { sun, mars } from "../constants";
 
-export default ({ parentPosition }) => {
+const Mars = ({ parentPosition }) => {
   const map = useLoader(TextureLoader, mars.texture);
   const meshRef = useRef();
   const {
@@ -43,3 +43,5 @@ export default ({ parentPosition }) => {
     </mesh>
   );
 };
+
+export default Mars;

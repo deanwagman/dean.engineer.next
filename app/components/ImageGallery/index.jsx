@@ -40,7 +40,7 @@ const ImageTile = ({ url, description, onClick }) => {
   );
 };
 
-export default () => {
+const ImageGallery = () => {
   const [imageIndex, setImageIndex] = useState(0);
   const [showLightBox, setShowLightBox] = useState(false);
   const [selectedImage, setSelectedImage] = useState(data.images[0]);
@@ -72,3 +72,5 @@ export default () => {
     </div>
   );
 };
+
+export default ImageGallery;

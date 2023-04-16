@@ -7,8 +7,6 @@ import styles from "./styles.module.css";
 
 const getRect = (ref) => ref?.current?.getBoundingClientRect();
 
-console.log({ config });
-
 const LightBox = ({ image, onClose, nodeRef, tileRef, show }) => {
   const [imageSpringProps, imageSpringAPI] = useSpring(
     () => ({

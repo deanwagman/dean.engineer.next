@@ -2,7 +2,7 @@ import { orbitron } from "../fonts";
 import { Navigation } from "../components/Nav";
 import { CenterLayout } from "../components/Layouts";
 
-export default () => {
+const Page = () => {
   return (
     <CenterLayout>
       <article>
@@ -115,3 +115,5 @@ export default () => {
     </CenterLayout>
   );
 };
+
+export default Page;

@@ -4,8 +4,7 @@ import { CenterLayout } from "../components/Layouts";
 const DataDescription = ({ children }: { children: any }) => (
   <dd className={sourceCodePro.className}>{children}</dd>
 );
-
-export default () => (
+const Page = () => (
   <CenterLayout>
     <article>
       <h1 data-content="Contact" className={orbitron.className}>
@@ -29,8 +28,8 @@ export default () => (
         respectful manner. Building strong relationships with colleagues and the
         wider community is a core value of mine, and I believe that open and
         honest communication is key to achieving this. So if you would like to
-        get in touch, please don't hesitate to do so. I&rsquo;m eager to hear
-        from you and explore the potential of working together.
+        get in touch, please don&rsquo;t hesitate to do so. I&rsquo;m eager to
+        hear from you and explore the potential of working together.
       </p>
 
       <dl>
@@ -80,3 +79,5 @@ export default () => (
     </article>
   </CenterLayout>
 );
+
+export default Page;
