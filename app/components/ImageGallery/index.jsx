@@ -36,6 +36,8 @@ const ImageTile = ({ src, description, onClick }) => {
               )}px rgba(0,0,0,0.75))`
           ),
         }}
+        placeholder="blur"
+        blurStyle={{ filter: "blur(3px)", imageRendering: "pixelated" }}
       />
     </div>
   );

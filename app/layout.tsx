@@ -1,6 +1,8 @@
 import "./globals.css";
 import { useRouter } from "next/router";
 import { ibmPlexSans } from "./fonts";
+import Image from "next/image";
+import backgroundImage from "./cyber-tower-background.jpg";
 
 export default function RootLayout({
   children,
@@ -9,6 +11,8 @@ export default function RootLayout({
 }) {
   const htmlClassNames = [ibmPlexSans.className].join(" ");
 
+  console.log({ backgroundImage });
+
   return (
     <html lang="en" className={htmlClassNames}>
       {/*
@@ -16,7 +20,7 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>
+      <body style={{ backgroundImage: `url("${backgroundImage.src}")` }}>
         <svg style={{ width: 0, height: 0, display: "none" }}>
           <defs>
             <filter id="plasma">

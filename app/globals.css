@@ -38,7 +38,7 @@ body {
   background: var(--color-background);
   font-size: 16px;
   line-height: 1.5rem;
-  background-image: url("/cyber-tower-background.png");
+  /* background-image: url("/cyber-tower-background.png"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
