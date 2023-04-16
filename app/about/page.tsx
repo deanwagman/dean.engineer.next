@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { CenterLayout } from "../components/Layouts";
 import { orbitron } from "../fonts";
+import Portrait from "./dean.jpg";
 
 const Page = () => {
   return (
@@ -8,8 +10,8 @@ const Page = () => {
         <h1 data-content="About" className={orbitron.className}>
           About
         </h1>
-        <img
-          src="/dean.jpg"
+        <Image
+          src={Portrait}
           alt="Dean Photo, cyberpunk nature asthetic, AI drawing"
           style={{
             maxWidth: "100%",

@@ -57,6 +57,7 @@
   width: 100%;
   max-width: 100%;
   margin-bottom: 2em;
+  height: auto;
 }
 
 .thumbnail:hover {

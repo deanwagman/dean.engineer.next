@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { sourceCodePro, orbitron } from "../fonts";
 import { CenterLayout } from "../components/Layouts";
+import goldenGateBridge from "./golden-gate-bridge.jpg";
 
 const DataDescription = ({ children }: { children: any }) => (
   <dd className={sourceCodePro.className}>{children}</dd>
@@ -10,8 +12,8 @@ const Page = () => (
       <h1 data-content="Contact" className={orbitron.className}>
         Contact
       </h1>
-      <img
-        src="/golden-gate-bridge.jpeg"
+      <Image
+        src={goldenGateBridge}
         alt="Golden Gate Bridge"
         style={{
           maxWidth: "100%",
@@ -19,6 +21,8 @@ const Page = () => (
           borderRadius: "1rem",
           boxShadow: "0 0 3rem 3rem rgba(0,0,0,0.3)",
         }}
+        width="672"
+        height="672"
       />
       <p>
         Connecting with other professionals in my industry and people who are

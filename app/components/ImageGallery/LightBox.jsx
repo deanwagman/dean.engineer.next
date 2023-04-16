@@ -7,6 +7,8 @@ import styles from "./styles.module.css";
 
 const getRect = (ref) => ref?.current?.getBoundingClientRect();
 
+const AnimatedImage = animated(Image);
+
 const LightBox = ({ image, onClose, nodeRef, tileRef, show }) => {
   const [imageSpringProps, imageSpringAPI] = useSpring(
     () => ({
@@ -112,7 +114,7 @@ const LightBox = ({ image, onClose, nodeRef, tileRef, show }) => {
       {/* TODO: Add image title and description */}
       {/* <h1 className={styles["image-title"]}>{image?.name}</h1>
       <p className={styles["image-description"]}>{image?.description}</p> */}
-      <animated.img
+      <AnimatedImage
         src={image?.src}
         alt={image?.description}
         className={styles["hero-image"]}

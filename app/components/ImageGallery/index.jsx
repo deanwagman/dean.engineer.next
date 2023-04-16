@@ -5,9 +5,11 @@ import Image from "next/image";
 import LightBox from "./LightBox";
 import data from "../../art/data";
 
+const AnimatedImage = animated(Image);
+
 import styles from "./styles.module.css";
 
-const ImageTile = ({ url, description, onClick }) => {
+const ImageTile = ({ src, description, onClick }) => {
   const [imageTileSpringProps, imageTileSpring] = useSpring(() => ({
     scale: 1,
     config: { mass: 1, tension: 200, friction: 20 },
@@ -18,14 +20,13 @@ const ImageTile = ({ url, description, onClick }) => {
 
   return (
     <div>
-      <animated.img
-        src={url}
+      <AnimatedImage
+        src={src}
         alt={description}
         className={styles.thumbnail}
         onClick={onClick}
         onMouseEnter={mouseEnter}
         onMouseLeave={mouseLeave}
-        loading="auto"
         style={{
           ...imageTileSpringProps,
           boxShadow: imageTileSpringProps.scale.to(
@@ -60,7 +61,7 @@ const ImageGallery = () => {
       {data.images.map((image, index) => (
         <ImageTile
           key={index}
-          url={image.src}
+          src={image.src}
           description={image.description}
           onClick={({ target }) => {
             tileRef.current = target;
@@ -74,3 +75,4 @@ const ImageGallery = () => {
 };
 
 export default ImageGallery;
+1;

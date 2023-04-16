@@ -46,6 +46,10 @@ body {
   backdrop-filter: blur(3px);
 }
 
+img {
+  height: auto;
+}
+
 article {
   position: relative;
   max-width: 80ch;

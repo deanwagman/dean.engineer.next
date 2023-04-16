@@ -8,6 +8,8 @@ import classNames from "classnames";
 import { orbitron } from "../fonts";
 import navStyles from "../nav.module.css";
 
+import deanLogo from "./dean-logo.png";
+
 const breakPoint = 1200;
 
 export const Navigation = () => {
@@ -54,7 +56,7 @@ export const Navigation = () => {
         style={navSpringProps}
       >
         <Link href="/" className={navStyles.logoContainer}>
-          <img src="/dean-logo.png" alt="Logo" className={navStyles.logo} />
+          <Image src={deanLogo} alt="Logo" className={navStyles.logo} />
         </Link>
 
         <ul className={navStyles.list}>
