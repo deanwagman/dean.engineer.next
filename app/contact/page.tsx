@@ -2,10 +2,12 @@ import Image from "next/image";
 import { sourceCodePro, orbitron } from "../fonts";
 import { CenterLayout } from "../components/Layouts";
 import goldenGateBridge from "./golden-gate-bridge.jpg";
+import qRCode from "./contact-qr-code.png";
 
 const DataDescription = ({ children }: { children: any }) => (
   <dd className={sourceCodePro.className}>{children}</dd>
 );
+
 const Page = () => (
   <CenterLayout>
     <article>
@@ -75,10 +77,12 @@ const Page = () => (
       </dl>
 
       <h2>QR Code for dean.engineer</h2>
-      <img
-        src="/contact-qr-code.png"
+      <Image
+        src={qRCode}
         style={{ maxWidth: "100%" }}
         alt="Website QR code"
+        width="672"
+        height="672"
       />
     </article>
   </CenterLayout>
