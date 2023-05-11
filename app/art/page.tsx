@@ -1,8 +1,9 @@
 import { CenterLayout } from "../components/Layouts";
 import ImageGallery from "../components/ImageGallery";
 import { orbitron } from "../fonts";
+import data from "./data";
 
-const Page = () => (
+const Page = (props: any) => (
   <CenterLayout>
     <article>
       <h1 data-content="Art" className={orbitron.className}>
@@ -22,7 +23,7 @@ const Page = () => (
       </p>
     </article>
 
-    <ImageGallery />
+    <ImageGallery images={data.images} />
   </CenterLayout>
 );
 

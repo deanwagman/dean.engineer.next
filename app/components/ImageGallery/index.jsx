@@ -42,10 +42,10 @@ const ImageTile = ({ src, description, onClick }) => {
   );
 };
 
-const ImageGallery = () => {
+const ImageGallery = ({ images = [] }) => {
   const [imageIndex, setImageIndex] = useState(0);
   const [showLightBox, setShowLightBox] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(data.images[0]);
+  const [selectedImage, setSelectedImage] = useState(images[0]);
   const lightBoxRef = useRef(null);
   const tileRef = useRef(null); // Ref for the image tile, used for the transition
 
@@ -59,7 +59,7 @@ const ImageGallery = () => {
         tileRef={tileRef}
       />
 
-      {data.images.map((image, index) => (
+      {images.map((image, index) => (
         <ImageTile
           key={index}
           src={image.src}
