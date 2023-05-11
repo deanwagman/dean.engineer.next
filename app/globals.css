@@ -163,6 +163,7 @@ h2 {
   margin-bottom: 1em;
   color: var(--color-mulberry-wine-light);
   font-size: 2rem;
+  line-height: 1.5;
 }
 
 h3 {
@@ -239,6 +240,17 @@ code {
   color: var(--color-text);
   padding: 0.2em 0.5em;
   border-radius: var(--border-radius);
+}
+
+pre {
+  padding: 1em;
+  background: var(--color-tertiary);
+  color: var(--color-text);
+  border-radius: var(--border-radius);
+  margin: 1em 0;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
 }
 
 blockquote {
