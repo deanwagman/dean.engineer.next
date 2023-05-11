@@ -1,5 +1,4 @@
 import { orbitron } from "../fonts";
-import { Navigation } from "../components/Nav";
 import { CenterLayout } from "../components/Layouts";
 
 const Page = () => {
