@@ -11,8 +11,6 @@ export default function RootLayout({
 }) {
   const htmlClassNames = [ibmPlexSans.className].join(" ");
 
-  console.log({ backgroundImage });
-
   return (
     <html lang="en" className={htmlClassNames}>
       {/*

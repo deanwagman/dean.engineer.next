@@ -23,23 +23,21 @@ const CameraOrbitController = () => {
   return null;
 };
 
-const PlatformWebGL = () => {
-  return (
-    <div className={styles.container}>
-      <Canvas className={styles.canvas}>
-        <OrthographicCamera
-          makeDefault
-          position={[300, 300, 300]}
-          zoom={30}
-          near={0.01}
-          far={1000}
-        />
-        <CameraOrbitController />
-        <ambientLight />
-        <Platform />
-      </Canvas>
-    </div>
-  );
-};
+const PlatformWebGL = () => (
+  <div className={styles.container}>
+    <Canvas className={styles.canvas}>
+      <OrthographicCamera
+        makeDefault
+        position={[300, 300, 300]}
+        zoom={30}
+        near={0.01}
+        far={1000}
+      />
+      <CameraOrbitController />
+      <ambientLight />
+      <Platform />
+    </Canvas>
+  </div>
+);
 
 export default PlatformWebGL;

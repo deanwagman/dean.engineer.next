@@ -7,13 +7,17 @@ import Image from "next/image";
 import classNames from "classnames";
 import { orbitron } from "../fonts";
 import navStyles from "../nav.module.css";
+import { debounce } from "../utilities";
 
 import deanLogo from "./dean-logo.png";
 
 const breakPoint = 1200;
 
 export const Navigation = () => {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const isClient = typeof window !== "undefined";
+  const [isExpanded, setIsExpanded] = useState(
+    isClient && window?.innerWidth > breakPoint ? true : false
+  );
   const onClick = () => setIsExpanded(!isExpanded);
 
   const navSpringProps = useSpring({
@@ -22,13 +26,13 @@ export const Navigation = () => {
   });
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = debounce(() => {
       if (window.innerWidth > breakPoint) {
         setIsExpanded(true);
       } else {
         setIsExpanded(false);
       }
-    };
+    }, 500);
 
     window.addEventListener("resize", handleResize, { passive: true });
     handleResize();
