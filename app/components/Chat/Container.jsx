@@ -7,7 +7,6 @@ import Messages from "./Messages";
 import UserInput from "./UserInput";
 import { ChatContext, ChatProvider, useChat } from "../../contexts/chat";
 import chatBotCreationPrompt from "../../prompts/chatBot";
-import sendMessages from "../../api/message/sendMessages";
 import { nanoid } from "nanoid";
 
 import styles from "./styles.module.css";
