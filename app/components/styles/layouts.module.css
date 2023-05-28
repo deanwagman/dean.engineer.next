@@ -6,7 +6,7 @@
 
 .mainColumn {
   display: flex;
-  max-height: 100vh;
+  max-height: calc(100 * var(--vh));
   overflow-y: auto;
   flex-direction: column;
 

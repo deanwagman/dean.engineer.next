@@ -19,6 +19,9 @@
   --color-navigation: #ffffff;
   --color-divider: var(--color-mulberry-wine);
   --color-accent: var(--color-turquoise-burst);
+
+  --vh: 100vh;
+  --vw: 100vw;
 }
 
 * {
@@ -46,9 +49,9 @@ body {
   backdrop-filter: blur(3px);
 }
 
-img {
+/* img {
   height: auto;
-}
+} */
 
 article {
   position: relative;
@@ -270,6 +273,21 @@ blockquote + p {
 
 p + button {
   margin-top: 1em;
+}
+
+/* Hide scrollbar track, but show the thumb */
+::-webkit-scrollbar {
+  width: 6px;
+} /* Styling the thumb */
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+} /* For all other non-webkit based browsers */ /* Set width for the scrollbar */
+body::-webkit-scrollbar {
+  width: 6px;
+} /* Firefox (Not Webkit) */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) var(--color-tertiary);
 }
 
 @media screen and (max-width: 1400px) {

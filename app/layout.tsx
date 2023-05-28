@@ -4,6 +4,8 @@ import { ibmPlexSans } from "./fonts";
 import Image from "next/image";
 import backgroundImage from "./cyber-tower-background.jpg";
 
+import ViewportSizer from "./components/ViewportSizer";
+
 export default function RootLayout({
   children,
 }: {
@@ -61,6 +63,8 @@ export default function RootLayout({
         {children}
 
         <div id="modal-root" />
+
+        <ViewportSizer />
       </body>
     </html>
   );
