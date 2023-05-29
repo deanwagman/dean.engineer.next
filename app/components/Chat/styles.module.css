@@ -6,6 +6,15 @@
   flex-direction: row;
   justify-content: flex-end;
   padding: 3rem;
+
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  backdrop-filter: blur(4px) brightness(50%);
 }
 
 @media screen and (max-width: 800px) {
@@ -112,7 +121,7 @@
     to bottom,
     transparent 0%,
     black 5%,
-    black 95%,
+    black 98%,
     transparent 100%
   );
 }
@@ -131,7 +140,7 @@
     opacity: 1;
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.8;
   }
   100% {
     opacity: 1;
@@ -171,4 +180,32 @@
     margin-block-end: -15vw;
     z-index: -1;
   }
+}
+
+.chatBotLaunchButton {
+  font-size: 8em;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+
+  position: fixed;
+  bottom: 0.1em;
+  right: 1rem;
+  z-index: 100;
+
+  outline: none;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  font-size: 2em;
+  color: rgba(255, 255, 255, 0.86);
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  z-index: 300;
 }

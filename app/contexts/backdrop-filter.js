@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext } from "react";
+import { createContext, useState, useContext, useRef, useEffect } from "react";
 
 const BackdropFilterContext = createContext();
 
@@ -11,6 +11,7 @@ export const BackdropFilterProvider = ({ children }) => {
   const [brightness, setBrightness] = useState(100);
   const [contrast, setContrast] = useState(100);
   const [grayscale, setGrayscale] = useState(0);
+  const bodyRef = useRef();
 
   const value = {
     blur,
@@ -22,6 +23,16 @@ export const BackdropFilterProvider = ({ children }) => {
     grayscale,
     setGrayscale,
   };
+
+  useEffect(() => {
+    bodyRef.current = document.querySelector("body");
+  }, []);
+
+  useEffect(() => {
+    const body = bodyRef.current;
+
+    body.style.backdropFilter = `blur(${blur}px) brightness(${brightness}%) contrast(${contrast}%) grayscale(${grayscale}%)`;
+  }, [blur, brightness, contrast, grayscale, bodyRef]);
 
   return (
     <BackdropFilterContext.Provider value={value}>

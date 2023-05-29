@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import { Navigation } from "../components/Nav";
 import { BackdropFilterProvider } from "../contexts/backdrop-filter";
+import FullscreenChatbot from "../components/Chat/FullscreenChat";
 
 import styles from "./styles/layouts.module.css";
 
@@ -14,6 +15,7 @@ export const CenterLayout = ({ children }: { children: any }) => {
         <div className={styles.mainColumn}>{children}</div>
       </div>
       <PlatformWebGL />
+      <FullscreenChatbot />
     </BackdropFilterProvider>
   );
 };
