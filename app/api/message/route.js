@@ -1,6 +1,15 @@
 import { NextResponse } from "next/server";
 import { Configuration, OpenAIApi } from "openai";
 import { createParser } from "eventsource-parser";
+import { RateLimiter } from "limiter";
+
+const tokensPerInterval = 6;
+
+const limiter = new RateLimiter({
+  tokensPerInterval,
+  interval: "hour",
+  fireImmediately: true,
+});
 
 const agentPersonality = `
 Hey there, AI companion! Let's give you a voice that's cute, a little sassy, and has a hint of cyberpunk flair. 
@@ -9,8 +18,9 @@ Ready to bring some charm and edginess to our conversations?"
 `;
 
 export async function POST(request, response) {
-  console.log("POST /api/message");
   const { messages } = await request.json();
+  const remainingTokens = await limiter.removeTokens(1);
+
   const adaptedMessages = messages.map(({ role, content }) => ({
     role,
     content,
@@ -18,6 +28,12 @@ export async function POST(request, response) {
 
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
+
+  if (remainingTokens < 1) {
+    return NextResponse.json({
+      error: "You've exceeded the rate limit for this API.",
+    });
+  }
 
   try {
     const openAiResponse = await fetch(
@@ -37,15 +53,10 @@ export async function POST(request, response) {
       }
     );
 
-    console.log({ openAiResponse });
-
     const stream = new ReadableStream({
       async start(controller) {
-        console.log("stream started");
         const onParse = (event) => {
           const { data } = event;
-
-          console.log({ data });
 
           if (data === "[DONE]") {
             console.log("stream complete");
@@ -68,13 +79,10 @@ export async function POST(request, response) {
         const parser = createParser(onParse);
 
         for await (const chunk of openAiResponse.body) {
-          console.log("chunk recieved");
           parser.feed(decoder.decode(chunk));
         }
       },
     });
-
-    console.log("stream returned");
 
     return new Response(stream);
   } catch (error) {

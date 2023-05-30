@@ -197,6 +197,22 @@
   outline: none;
 }
 
+@media screen and (max-width: 800px) {
+  .chatBotLaunchButton {
+    font-size: 6em;
+    bottom: 0.1em;
+    right: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .chatBotLaunchButton {
+    font-size: 4em;
+    bottom: 0.1em;
+    right: 0.5rem;
+  }
+}
+
 .closeButton {
   position: absolute;
   top: 0;

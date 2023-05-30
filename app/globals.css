@@ -46,7 +46,6 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
-  backdrop-filter: blur(3px);
 
   transition: backdrop-filter 1s ease-in-out;
 }

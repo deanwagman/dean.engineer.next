@@ -106,7 +106,6 @@ const Container = () => {
           const { done, value } = await reader.read();
 
           if (done) {
-            console.log("stream complete");
             break;
           }
 
