@@ -1,4 +1,5 @@
 import { sourceCodePro } from "../../fonts";
+import Markdown from "markdown-to-jsx";
 
 import styles from "./styles.module.css";
 
@@ -11,7 +12,7 @@ const Message = ({ message, direction }) => {
         direction === "out" ? styles.message__invert : "",
       ].join(" ")}
     >
-      {message}
+      <Markdown>{message}</Markdown>
     </div>
   );
 };
