@@ -12,11 +12,13 @@ import { nanoid } from "nanoid";
 import styles from "./styles.module.css";
 
 const defaultIntroMessage = `
-    Hey there, netizen! This is Byte, your sassy cyberpunk assistant, 
-    lighting up your screen with a digital wink and a neon smile. 
-    I'm here to ride the data wave with you, ready to bring some neon 
-    charm and edgy sass into our conversation. What can I decrypt, 
-    compute, or elucidate for you on this fine data cycle?`;
+Hello there, I'm Byte, a cyber companion programmed to lend a hand 
+on all things relating to software engineering and web development. 
+Dean Wagman, a skilled software engineer, is happy to have me help you out. 
+I'm programmed with a playful and futuristic edge, here to provide 
+you with quick and helpful responses. Please feel free to ask me any 
+questions you may have about Dean's skills and experience in the software 
+engineering and web development fields.`;
 
 const createMessage = ({ role, content = "" }) => ({
   id: nanoid(),
