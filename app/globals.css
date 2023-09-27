@@ -79,11 +79,12 @@ article::before {
 
   box-shadow: 0 0 10px #00202e, 0 0 20px #00202e, 0 0 30px #00b6a7,
     0 0 40px #00202e, 0 0 70px rgba(0, 32, 46, 0.7);
-  background-color: var(--color-deep-sea);
+    background-image: radial-gradient(var(--color-mulberry-wine), var(--color-deep-sea));
+    background-color: var(--color-deep-sea);
 
   z-index: -1;
 
-  filter: url("#plasma") blur(2px);
+  filter: url("#plasma") blur(5px) contrast(1.1);
 }
 
 /* Headlines */

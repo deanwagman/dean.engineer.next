@@ -1,3 +1,13 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .container {
   position: absolute;
   top: 0;
@@ -9,4 +19,8 @@
   align-items: center;
   z-index: -10;
   pointer-events: none;
+  animation-name: fade-in;
+  animation-duration: 5s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
 }

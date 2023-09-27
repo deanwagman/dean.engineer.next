@@ -55,7 +55,7 @@ const FullScreenChat = () => {
       ) : null}
 
       {/* Chat Container */}
-      {isOpen ? <Container /> : null}
+      {isOpen ? <Container closeChat={() => setIsOpen(false)} /> : null}
     </div>
   );
 };

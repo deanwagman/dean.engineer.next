@@ -22,6 +22,8 @@ export const Navigation = () => {
 
   const navSpringProps = useSpring({
     transform: `translateX(${isExpanded ? 0 : -100}%)`,
+    opacity: isExpanded ? 1 : 0,
+    filter: isExpanded ? "blur(0)" : "blur(5px)",
     config: { ...config.gentle, clamp: true },
   });
 

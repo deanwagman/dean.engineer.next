@@ -48,7 +48,7 @@ const shouldSendMessages = (messages) => {
   return lastMessageSenderRole === "user";
 };
 
-const Container = () => {
+const Container = ({ closeChat }) => {
   const [messages, setMessages] = useState(defaultMessages);
   const [isRequesting, setIsRequesting] = useState(false);
 
@@ -66,6 +66,14 @@ const Container = () => {
         return message;
       })
     );
+  };
+
+  const handleBackdropClick = (e) => {
+    const { target } = e;
+    console.log({ e, target });
+    if (target.id === "chat-container") {
+      closeChat();
+    }
   };
 
   const chatProviderValue = {
@@ -136,10 +144,12 @@ const Container = () => {
     >
       <ChatProvider value={chatProviderValue}>
         <div
+          id="chat-container"
           className={[
             styles.container,
             isRequesting ? styles.shimmer : "",
           ].join(" ")}
+          onClick={handleBackdropClick}
         >
           <Image
             src={ChatbotImageSrc}

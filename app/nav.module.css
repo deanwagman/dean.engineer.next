@@ -129,6 +129,7 @@
     var(--color-plum-royale)
   );
   transform: scale(1.05);
+  color: white;
 }
 
 .list:hover .item:not(:hover) {
@@ -162,7 +163,16 @@
   fill: var(--color-accent);
 }
 
+@media screen and (min-width: 1201px) {
+  .container {
+    transform: translateX(0) !important;
+  }
+}
+
 @media screen and (max-width: 1200px) {
+  .container {
+    transform: translateX(-100%);
+  }
   .container::before {
     width: calc(100% + 90px);
     opacity: 1;
