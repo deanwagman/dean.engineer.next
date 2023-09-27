@@ -12,13 +12,8 @@ import { nanoid } from "nanoid";
 import styles from "./styles.module.css";
 
 const defaultIntroMessage = `
-Hello there, I'm Byte, a cyber companion programmed to lend a hand 
-on all things relating to software engineering and web development. 
-Dean Wagman, a skilled software engineer, is happy to have me help you out. 
-I'm programmed with a playful and futuristic edge, here to provide 
-you with quick and helpful responses. Please feel free to ask me any 
-questions you may have about Dean's skills and experience in the software 
-engineering and web development fields.`;
+Hey there, digital wanderer! I’m Byte, your cyber sidekick, wired and ready to dive deep into the realms of software engineering and web development. Crafted by the code maestro Dean Wagman, I’m here, glowing with blue lights and a playful spark, to guide you through the digital maze. Got queries about Dean's techno wizardry, his experience in the vast universe of software and web? Fire away! Let’s navigate the cyber lanes and light up the path with quick and snazzy answers, all with a futuristic flair. Ready to ride the data waves? Let’s roll! 🤖💡
+`;
 
 const createMessage = ({ role, content = "" }) => ({
   id: nanoid(),

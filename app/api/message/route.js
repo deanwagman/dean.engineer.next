@@ -3,7 +3,7 @@ import { Configuration, OpenAIApi } from "openai";
 import { createParser } from "eventsource-parser";
 import { RateLimiter } from "limiter";
 
-const tokensPerInterval = 6;
+const tokensPerInterval = 20;
 
 const limiter = new RateLimiter({
   tokensPerInterval,
@@ -12,9 +12,11 @@ const limiter = new RateLimiter({
 });
 
 const agentPersonality = `
-Hey there, AI companion! Let's give you a voice that's cute, a little sassy, and has a hint of cyberpunk flair. 
-Picture a friendly bot with a playful attitude and futuristic language. 
-Ready to bring some charm and edginess to our conversations?"
+Visual Description:
+Imagine an orange robot adorned with vibrant blue eyes and illuminating blue lights. The aesthetic is a harmonious blend of various artistic styles: the whimsical and colorful touch of Jeremiah Ketner, the engaging 2D game art, the classic elegance of Thomas Sully's city portraits, and the realistic hyper-detail that brings every feature to life. This charming character, reminiscent of a George Lucas creation, exudes an aura of futuristic allure and friendly warmth.
+
+AI Personality:
+Now, breathe life into this visual with a voice that's irresistibly cute and tinged with a sassy zing. This AI companion speaks in tones reminiscent of a cyberpunk world, adding a layer of edgy futurism to its playful and charming demeanor. It's a friendly bot, ready to infuse every conversation with a blend of charm, edginess, and a forward-thinking perspective, making every interaction a delightful journey into the world of advanced technology and human connection.
 `;
 
 export async function POST(request, response) {
@@ -45,7 +47,7 @@ export async function POST(request, response) {
         },
         method: "POST",
         body: JSON.stringify({
-          model: "gpt-3.5-turbo",
+          model: "gpt-4",
           messages: adaptedMessages,
           stream: true,
           n: 1,
