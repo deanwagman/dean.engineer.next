@@ -22,33 +22,40 @@ const Page = () => {
           placeholder="blur"
         />
         <p>
-          Hello, my name is Dean and I&rsquo;m a software engineer based in San
-          Francisco, California. I specialize in UI engineering with a focus on
-          front-end technologies such as React, React Native, and Redux, as well
-          as back-end technologies like PHP, Composer, Symfony, and Laravel.
+          Hello, my name is Dean, and I’m a Senior Software Engineer based in
+          San Francisco, California. I specialize in full-stack development with
+          a strong emphasis on UI engineering. My expertise lies in front-end
+          technologies such as React, React Native, and Redux, complemented by
+          back-end experience in frameworks like NestJS, Symfony, and Laravel.
         </p>
+
         <p>
-          I have over 8 years of experience in the software engineering
-          industry, having worked for companies like Tesla, Uber, and Helix.
-          Throughout my career, I&rsquo;ve developed a passion for using
-          technology to solve complex problems and create beautiful, performant
-          user interfaces.
+          With over 10 years of industry experience, I’ve had the privilege of
+          working with leading companies such as Tesla, Uber, and Moxion Power.
+          My journey in software engineering has fueled my passion for crafting
+          elegant, performant, and scalable solutions to complex problems,
+          always with an eye on creating delightful user experiences.
         </p>
+
         <p>
-          What sets me apart as a software engineer is my ability to approach
-          technical challenges from both a technical and design perspective.
-          I&rsquo;m always looking for new and innovative ways to solve problems
-          and create delightful user experiences.
+          What sets me apart is my ability to seamlessly blend technical
+          expertise with a keen design perspective, allowing me to approach
+          challenges holistically. I’m continually exploring new technologies
+          and methodologies to push the boundaries of what’s possible in
+          software development.
         </p>
+
         <p>
-          Outside of work, I enjoy exploring the great outdoors through hiking,
-          camping, and road trips. I&rsquo;m always up for an adventure and love
-          discovering new places and experiences. I also enjoy attending tech
-          meetups and collaborating with other developers to learn and grow.
+          Outside of work, you’ll find me embracing the great outdoors through
+          hiking, camping, and road trips. Adventure calls to me, and I love
+          discovering new places and experiences. I’m also an active participant
+          in the tech community, regularly attending meetups and collaborating
+          with fellow developers to learn and grow.
         </p>
+
         <p>
-          If you&rsquo;re interested in working together or just want to
-          connect, feel free to send me a message!
+          If you’re interested in collaborating or simply want to connect, don’t
+          hesitate to reach out!
         </p>
       </article>
     </CenterLayout>

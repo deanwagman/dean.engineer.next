@@ -6,6 +6,7 @@ import { OrthographicCamera, Plane } from "@react-three/drei";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { PlaneBufferGeometry, MeshBasicMaterial, Mesh, Fog } from "three";
 import Platform from "./Platform";
+import Particles from "./Particles";
 import styles from "./styles.module.css";
 
 const CameraOrbitController = () => {
@@ -32,6 +33,11 @@ const PlatformWebGL = () => (
         zoom={30}
         near={0.01}
         far={1000}
+      />
+      {/* Fog fades out elements into tranparent */}
+      <fog 
+        attach="fog" 
+        args={["#5B1D2A", 0, 1000]}
       />
       <CameraOrbitController />
       <ambientLight />

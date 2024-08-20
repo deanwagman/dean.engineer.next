@@ -3,7 +3,7 @@ import {
   Montserrat,
   IBM_Plex_Sans,
   Source_Code_Pro,
-} from "@next/font/google";
+} from "next/font/google";
 
 export const orbitron = Orbitron({ subsets: ["latin"] });
 export const ibmPlexSans = IBM_Plex_Sans({

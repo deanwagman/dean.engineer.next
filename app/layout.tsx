@@ -20,7 +20,13 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body style={{ backgroundImage: `url("${backgroundImage.src}")` }}>
+      <body
+        style={{
+          backgroundImage: `
+            url("${backgroundImage.src}")
+          `,
+        }}
+      >
         <svg style={{ width: 0, height: 0, display: "none" }}>
           <defs>
             <filter id="plasma">
