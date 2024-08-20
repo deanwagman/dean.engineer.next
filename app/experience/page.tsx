@@ -62,13 +62,14 @@ const Page = () => {
         </h3>
         <ul>
           <li>
-            Led the end-to-end development of "Unity," a full-stack application
-            designed for manufacturing teams to track and log details of Battery
-            Units throughout their pre-delivery lifecycle. This project involved
-            direct engagement with stakeholders to gather requirements,
-            challenge assumptions, and refine core features. Successfully
-            migrated teams from disparate spreadsheets to a unified platform
-            deployed on AWS, enabling enhanced collaboration and scalability.
+            Led the end-to-end development of &ldquo;Unity,&rdquo; a full-stack
+            application designed for manufacturing teams to track and log
+            details of Battery Units throughout their pre-delivery lifecycle.
+            This project involved direct engagement with stakeholders to gather
+            requirements, challenge assumptions, and refine core features.
+            Successfully migrated teams from disparate spreadsheets to a unified
+            platform deployed on AWS, enabling enhanced collaboration and
+            scalability.
           </li>
           <li>
             Architected and implemented a robust resource filtering system for
