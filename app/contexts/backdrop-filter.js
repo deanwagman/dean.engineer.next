@@ -6,14 +6,22 @@ const BackdropFilterContext = createContext();
 
 export default BackdropFilterContext;
 
-export const BackdropFilterProvider = ({ children }) => {
+export const useBackdropFilterItem = (ref) => {
   const [blur, setBlur] = useState(0);
   const [brightness, setBrightness] = useState(100);
   const [contrast, setContrast] = useState(100);
   const [grayscale, setGrayscale] = useState(0);
-  const bodyRef = useRef();
+  const elemnetRef = useRef();
 
-  const value = {
+  useEffect(() => {
+    const element = elemnetRef.current;
+
+    if (element?.style) {
+      element.style.backdropFilter = `blur(${blur}px) brightness(${brightness}%) contrast(${contrast}%) grayscale(${grayscale}%)`;
+    }
+  }, [blur, brightness, contrast, grayscale, elemnetRef]);
+
+  return {
     blur,
     setBlur,
     brightness,
@@ -22,17 +30,12 @@ export const BackdropFilterProvider = ({ children }) => {
     setContrast,
     grayscale,
     setGrayscale,
+    ref: elemnetRef,
   };
+};
 
-  useEffect(() => {
-    bodyRef.current = document.querySelector("body");
-  }, []);
-
-  useEffect(() => {
-    const body = bodyRef.current;
-
-    body.style.backdropFilter = `blur(${blur}px) brightness(${brightness}%) contrast(${contrast}%) grayscale(${grayscale}%)`;
-  }, [blur, brightness, contrast, grayscale, bodyRef]);
+export const BackdropFilterProvider = ({ elementRef, children }) => {
+  const value = useBackdropFilterItem(elementRef);
 
   return (
     <BackdropFilterContext.Provider value={value}>

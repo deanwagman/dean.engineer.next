@@ -69,6 +69,7 @@ article {
   background-size: cover;
   background-position: center center;
   background-repeat: repeat;
+  border-radius: 1rem;
 }
 
 article::before {
@@ -81,12 +82,13 @@ article::before {
 
   box-shadow: 0 0 10px #00202e, 0 0 20px #00202e, 0 0 30px #00b6a7,
     0 0 40px #00202e, 0 0 70px rgba(0, 32, 46, 0.7);
-    background-image: radial-gradient(var(--color-mulberry-wine), var(--color-deep-sea));
-    background-color: var(--color-deep-sea);
+  background-image: radial-gradient(var(--color-mulberry-wine), var(--color-deep-sea));
+  background-color: var(--color-deep-sea);
 
   z-index: -1;
+  border-radius: 1.5rem;
 
-  filter: url("#plasma") blur(5px) contrast(1.1);
+  /* filter: url("#plasma"); */
 }
 
 /* Headlines */
@@ -268,28 +270,35 @@ blockquote {
   color: var(--color-text);
 }
 
-p + blockquote {
+p+blockquote {
   margin-top: 1em;
 }
 
-blockquote + p {
+blockquote+p {
   margin-top: 1em;
 }
 
-p + button {
+p+button {
   margin-top: 1em;
 }
 
 /* Hide scrollbar track, but show the thumb */
 ::-webkit-scrollbar {
   width: 6px;
-} /* Styling the thumb */
+}
+
+/* Styling the thumb */
 ::-webkit-scrollbar-thumb {
   background-color: var(--color-accent);
-} /* For all other non-webkit based browsers */ /* Set width for the scrollbar */
+}
+
+/* For all other non-webkit based browsers */
+/* Set width for the scrollbar */
 body::-webkit-scrollbar {
   width: 6px;
-} /* Firefox (Not Webkit) */
+}
+
+/* Firefox (Not Webkit) */
 body {
   scrollbar-width: thin;
   scrollbar-color: var(--color-accent) var(--color-tertiary);
@@ -299,6 +308,7 @@ body {
   body {
     font-size: 14px;
   }
+
   h1 {
     font-size: 2rem;
   }
@@ -318,18 +328,23 @@ body {
   article {
     margin-top: 4rem;
   }
+
   h1 {
     font-size: 1.5rem;
   }
+
   h2 {
     font-size: 1.25rem;
   }
+
   h3 {
     font-size: 1rem;
   }
+
   p {
     line-height: 1.5rem;
   }
+
   li {
     line-height: 1.5rem;
   }

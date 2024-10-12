@@ -72,10 +72,16 @@ export const Navigation = () => {
             </Link>
           </li>
           <li className={navStyles.item}>
+            <Link href="/resume" className={classNames(orbitron.className)}>
+              Resume
+            </Link>
+          </li>
+          <li className={navStyles.item}>
             <Link href="/experience" className={classNames(orbitron.className)}>
               Experience
             </Link>
           </li>
+          {/* Removing this for now beause it's crazy out of date */}
           <li className={navStyles.item}>
             <Link href="/art" className={classNames(orbitron.className)}>
               Art
@@ -84,11 +90,6 @@ export const Navigation = () => {
           <li className={navStyles.item}>
             <Link href="/blog" className={classNames(orbitron.className)}>
               Blog
-            </Link>
-          </li>
-          <li className={navStyles.item}>
-            <Link href="/resume" className={classNames(orbitron.className)}>
-              Resume
             </Link>
           </li>
           <li className={navStyles.item}>
@@ -101,3 +102,5 @@ export const Navigation = () => {
     </>
   );
 };
+
+export default Navigation;
