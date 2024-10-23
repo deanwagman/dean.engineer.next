@@ -52,7 +52,7 @@
   background: none;
   border: none;
   width: 100%;
-  padding: 1em;
+  padding: 0.3em;
   margin: 0.5em;
   transition: min-height 300ms ease-in-out;
   height: auto;
@@ -117,13 +117,11 @@
   margin: 0 0 2rem 0;
   gap: 2.68em;
 
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    black 5%,
-    black 98%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to bottom,
+      transparent 0%,
+      black 5%,
+      black 98%,
+      transparent 100%);
 }
 
 .main {
@@ -131,7 +129,7 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  max-width: 1000px;
+  max-width: 80ch;
   overflow-y: auto;
 }
 
@@ -139,9 +137,11 @@
   0% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.8;
   }
+
   100% {
     opacity: 1;
   }
@@ -154,16 +154,14 @@
 }
 
 .chatBotAvatar {
-  width: 400px;
+  width: 200px;
   align-self: flex-end;
 
-  mask-image: linear-gradient(
-    to top,
-    transparent 0%,
-    transparent 5%,
-    black 30%,
-    black 100%
-  );
+  mask-image: linear-gradient(to top,
+      transparent 0%,
+      transparent 8%,
+      black 30%,
+      black 100%);
 }
 
 @media screen and (max-width: 1000px) {

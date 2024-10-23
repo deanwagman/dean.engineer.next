@@ -25,47 +25,54 @@ const Page = () => {
           <h2>Skills</h2>
           <ul>
             <li>
-              Full-Stack Development: JavaScript, TypeScript, React, React
-              Native, NestJS, NextJS, Node.js, Python, Express.js
+              Full-Stack Development: <br />
+              JavaScript, TypeScript, React, React Native, NestJS, NextJS,
+              Node.js, Python, Express.js
             </li>
             <li>
-              UI/UX Design: Material UI, Responsive Design, Component Libraries
-              (including experience building custom component libraries)
+              UI/UX Design: <br />
+              Material UI, Responsive Design, Component Libraries (including
+              experience building custom component libraries)
             </li>
             <li>
-              Cloud & DevOps: AWS (EC2, RDS, S3, Lambda), Docker,
-              Containerization, CI/CD, CDK for Terraform
+              Cloud & DevOps: <br />
+              AWS (EC2, RDS, S3, Lambda), Docker, Containerization, CI/CD, CDK
+              for Terraform
             </li>
             <li>
-              Backend & APIs: RESTful Services, GraphQL, Microservices
-              Architecture
+              Backend & APIs: <br />
+              RESTful Services, GraphQL, Microservices Architecture
             </li>
             <li>
-              Database Management: SQL, PostgreSQL, TypeORM, NoSQL Databases
+              Database Management: <br />
+              SQL, PostgreSQL, TypeORM, NoSQL Databases
             </li>
             <li>
-              Version Control & Collaboration: Git, GitHub, Bitbucket, Code
-              Reviews
+              Version Control & Collaboration: <br />
+              Git, GitHub, Bitbucket, Code Reviews
             </li>
             <li>
-              Agile Methodologies: Scrum, Kanban, Sprint Planning, Iteration
-              Cycles
+              Agile Methodologies: <br />
+              Scrum, Kanban, Sprint Planning, Iteration Cycles
             </li>
             <li>
-              Testing & Quality Assurance: Unit Testing, Integration Testing,
-              Automated Testing Frameworks
+              Testing & Quality Assurance: <br />
+              Unit Testing, Integration Testing, Automated Testing Frameworks
             </li>
             <li>
-              Tooling & Workflow Optimization: JIRA, Confluence, Trello,
-              Continuous Integration
+              Tooling & Workflow Optimization:
+              <br />
+              JIRA, Confluence, Trello, Continuous Integration
             </li>
           </ul>
 
           <h2>Professional Experience</h2>
 
           <h3 className={orbitron.className}>
-            Moxion Power | Senior Software Engineer / Manufactoring Apps Tech
-            Lead | October 2023 - August 2024
+            Moxion Power <br />
+            Senior Software Engineer <br />
+            Manufactoring Product Apps Tech Lead <br />
+            October 2023 - August 2024
           </h3>
           <ul>
             <li>
@@ -108,7 +115,9 @@ const Page = () => {
           </ul>
 
           <h3 className={orbitron.className}>
-            Tesla | Sr. Software Engineer | November 2020 - December 2022
+            Tesla <br />
+            Sr. Software Engineer <br />
+            November 2020 - December 2022
           </h3>
           <ul>
             <li>
@@ -147,7 +156,9 @@ const Page = () => {
           </ul>
 
           <h3 className={orbitron.className}>
-            Uber Eats | Software Engineer | April 2019 - May 2020
+            Uber Eats <br />
+            Software Engineer <br />
+            April 2019 - May 2020
           </h3>
           <ul>
             <li>
@@ -177,7 +188,9 @@ const Page = () => {
           </ul>
 
           <h3 className={orbitron.className}>
-            Helix | Web Engineer | May 2017 - January 2019
+            Helix <br />
+            Web Engineer <br />
+            May 2017 - January 2019
           </h3>
           <ul>
             <li>
@@ -206,7 +219,9 @@ const Page = () => {
           </ul>
 
           <h3 className={orbitron.className}>
-            Purple, Rock, Scissors | Web Engineer | August 2014 - October 2016
+            Purple, Rock, Scissors <br />
+            Web Engineer <br />
+            August 2014 - October 2016
           </h3>
           <ul>
             <li>

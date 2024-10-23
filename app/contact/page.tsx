@@ -23,6 +23,7 @@ const Page = () => (
             marginBottom: "3rem",
             borderRadius: "1rem",
             boxShadow: "0 0 3rem 3rem rgba(0,0,0,0.3)",
+            mixBlendMode: "lighten",
           }}
           width="672"
           height="672"
@@ -80,7 +81,7 @@ const Page = () => (
         <h2>QR Code for dean.engineer</h2>
         <Image
           src={qRCode}
-          style={{ maxWidth: "100%" }}
+          style={{ maxWidth: "100%", mixBlendMode: "color-dodge" }}
           alt="Website QR code"
           width="672"
           height="672"

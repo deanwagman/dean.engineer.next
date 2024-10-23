@@ -101,12 +101,41 @@ h1 {
   margin-bottom: 1em;
   font-size: 2.5rem;
   line-height: 1.5;
-  letter-spacing: 0.05ch;
+  letter-spacing: 0.25ch;
   color: white;
   text-shadow: 1px 1px 2px #5b1d2a;
   width: 100%;
   text-align: center;
 }
+
+article h1 {
+  filter: opacity(0.9);
+  -webkit-font-smoothing: antialiased;
+}
+
+article h2 {
+  filter: opacity(0.9);
+  letter-spacing: 0.1ch;
+  /* smooth graphic edges */
+  text-shadow: 1px 1px 2px #5b1d2a;
+  mix-blend-mode: plus-lighter;
+  -webkit-font-smoothing: antialiased;
+}
+
+article h3 {
+  filter: opacity(0.9);
+  letter-spacing: 0.1ch;
+  /* smooth graphic edges */
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 5px -1px 4px #5b1d2a;
+  mix-blend-mode: plus-lighter;
+}
+
+article p {
+  filter: opacity(0.9);
+  letter-spacing: 0.05ch;
+}
+
 
 h1::before {
   content: attr(data-content);
@@ -326,7 +355,7 @@ body {
 
 @media screen and (max-width: 800px) {
   article {
-    margin-top: 4rem;
+    margin-top: 8rem;
   }
 
   h1 {

@@ -155,6 +155,10 @@ const Container = ({ closeChat }) => {
             src={ChatbotImageSrc}
             alt="Chatbot"
             className={styles.chatBotAvatar}
+            style={{
+              viewTransitionName: "byte-avatar",
+              filter: "grayscale(0.3)",
+            }}
           />
           <div className={styles.main}>
             <Messages messages={filteredMessages} />

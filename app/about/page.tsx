@@ -19,6 +19,7 @@ const Page = () => {
               marginBottom: "3rem",
               borderRadius: "1rem",
               boxShadow: "0 0 3rem 3rem rgba(0,0,0,0.3)",
+              mixBlendMode: "lighten",
             }}
             placeholder="blur"
           />
