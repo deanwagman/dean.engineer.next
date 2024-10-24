@@ -32,8 +32,15 @@ export const DistopiaLayout = ({ children }: { children: any }) => {
         }}
         ref={ref}
       >
-        {/* Custom SVG filter for plastma effect */}
-        <svg style={{ width: 0, height: 0, visibility: "hidden" }}>
+        {/* Custom SVG filter for plasma effect */}
+        <svg
+          style={{
+            width: 0,
+            height: 0,
+            position: "absolute",
+            visibility: "hidden",
+          }}
+        >
           <defs>
             <filter id="plasma">
               <feTurbulence baseFrequency="0.009" numOctaves="5" seed="2">

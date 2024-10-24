@@ -6,15 +6,13 @@
   flex-direction: row;
   justify-content: flex-end;
   padding: 3rem;
+}
 
-  position: absolute;
-  z-index: 100;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  backdrop-filter: blur(4px) brightness(50%);
+/* Disable for now */
+@media screen and (max-width: 1111px) {
+  .chatWindow {
+    display: none !important;
+  }
 }
 
 @media screen and (max-width: 800px) {

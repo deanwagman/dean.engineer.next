@@ -20,7 +20,7 @@ const Message = ({ message, direction, simulate, style }) => {
         return;
       }
 
-      setValue((prev) => prev + message[i]);
+      setValue((prev) => prev + (message[i] || ""));
       i++;
 
       if (i === message.length) {
@@ -40,7 +40,7 @@ const Message = ({ message, direction, simulate, style }) => {
       ].join(" ")}
       style={style}
     >
-      <Markdown>{value}</Markdown>
+      <Markdown>{simulate ? value : message}</Markdown>
     </div>
   );
 };
