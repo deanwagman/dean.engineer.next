@@ -11,13 +11,13 @@ const Page = () => {
         <article>
           <h1 data-content="Blog">Blog</h1>
 
-          {metaData.map(({ title, slug, description }) => (
-            <>
+          {metaData.reverse().map(({ title, slug, description }) => (
+            <div key="title" style={{ margin: "4rem 0" }}>
               <Link href={`/blog/${slug}`} key={slug}>
-                <h2>{title}</h2>
-                <p>{description}</p>
+                <h3>{title}</h3>
               </Link>
-            </>
+              <p>{description}</p>
+            </div>
           ))}
         </article>
       </CenterLayout>
