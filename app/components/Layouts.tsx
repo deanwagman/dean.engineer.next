@@ -82,8 +82,8 @@ export const DistopiaLayout = ({ children }: { children: any }) => {
 
         {children}
       </div>
-      <PlatformWebGL />
       <FullscreenChatbot />
+      <PlatformWebGL />
     </BackdropFilterProvider>
   );
 };
