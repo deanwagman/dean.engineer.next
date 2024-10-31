@@ -8,13 +8,6 @@
   padding: 3rem;
 }
 
-/* Disable for now */
-@media screen and (max-width: 1111px) {
-  .chatWindow {
-    display: none !important;
-  }
-}
-
 @media screen and (max-width: 800px) {
   .container {
     flex-direction: column;
@@ -166,14 +159,13 @@
 
 @media screen and (max-width: 1000px) {
   .chatBotAvatar {
-    width: 24vw;
+    width: 20vw;
     height: auto;
   }
 }
 
 @media screen and (max-width: 800px) {
   .chatBotAvatar {
-    width: 30vw;
     align-self: center;
     margin-block-end: -15vw;
     z-index: -1;

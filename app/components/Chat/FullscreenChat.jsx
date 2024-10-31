@@ -3,10 +3,10 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import ChatbotImageSrc from "public/chatbot.png";
-import styles from "./styles.module.css";
+// import styles from "./styles.module.css";
 import Message from "./Message";
 import { useBackdropFilter } from "../../contexts/backdrop-filter";
-import { useSpring, animated, config } from "@react-spring/web";
+import { useSpring, animated, config, useTransition } from "@react-spring/web";
 
 import Messages from "./Messages";
 import UserInput from "./UserInput";
@@ -98,13 +98,6 @@ const FullScreenChat = () => {
   };
 
   useEffect(() => {
-    const hasExited = localStorage.getItem("chatbot-exited");
-    if (hasExited) {
-      setIsExited(true);
-    }
-  });
-
-  useEffect(() => {
     const request = async () => {
       setIsRequesting(true);
 
@@ -162,42 +155,78 @@ const FullScreenChat = () => {
     return () => document.removeEventListener("keydown", onEscape);
   }, [isOpen]);
 
-  useEffect(() => {
-    if (isOpen) {
-      setBlur(30);
-      setBrightness(50);
-    } else {
-      setBlur(0);
-      setBrightness(100);
-    }
-
-    return () => {
-      setBlur(3);
-      setBrightness(100);
-    };
-  }, [isOpen, setBlur, setBrightness]);
-
   const toggleChat = () => {
     setIsOpen((prev) => !prev);
   };
 
+  const [containerSpringProps, containerSpring] = useSpring(() => ({
+    config: config.stiff,
+    from: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
+  }));
+
+  const chatWindowWidths = {
+    sm: 380,
+    md: 380,
+    lg: 400,
+    xl: 440,
+  };
+  const windowWidth = window.innerWidth;
+  const size =
+    windowWidth < 690
+      ? "sm"
+      : windowWidth < 768
+      ? "md"
+      : windowWidth < 1400
+      ? "lg"
+      : "xl";
+  const chatWindowWidth = chatWindowWidths[size];
+
+  const avatarWidths = {
+    sm: 100,
+    md: 150,
+    lg: 150,
+    xl: 200,
+  };
+  const avatarWidth = avatarWidths[size];
+
   const [chatSpringProps, chatSpring] = useSpring(() => ({
     config: config.stiff,
-    x: 0,
+    from: {
+      position: "absolute",
+      bottom: 0,
+      right: 0,
+      translateX: isOpen ? 0 : chatWindowWidth,
+      maxWidth: "80ch",
+      margin: 0,
+      opacity: 0,
+      padding: "1em",
+      borderTopLeftRadius: "10rem",
+      backgroundColor:
+        size === "sm" || size === "md" || size === "lg"
+          ? "rgba(0, 0, 0, 0.5)"
+          : "rgba(0, 0, 0, 0)",
+      backdropFilter: "blur(3px)",
+    },
+    to: {
+      opacity: 1,
+    },
   }));
+
   const [avatarSpringProps, avatarSpring] = useSpring(() => ({
     config: config.stiff,
-    rotateY: isOpen ? 0 : 180,
-    translateX: 0,
-    from: { rotateY: 180, translateX: 0 },
-    to: { rotateY: 0, translateX: 0 },
-    delay: 1000,
+    from: {
+      // rotateY: 180,
+      width: avatarWidth,
+      translateX: 0,
+      translateY: 0,
+      rotateY: isOpen ? 0 : 180,
+      filter: "grayscale(0.3)",
+      overflow: "hidden",
+    },
   }));
   const [welcomeMessageSpringProps, welcomeMessageSpring] = useSpring(() => ({
     config: config.stiff,
-    from: { opacity: 0 },
-    to: { opacity: 0 },
-    delay: 5000,
+    from: { opacity: 1 },
   }));
   const [openButtonSpringProps, openButtonSpring] = useSpring(() => ({
     config: {
@@ -205,9 +234,7 @@ const FullScreenChat = () => {
       tension: 10,
       friction: 10,
     },
-    from: { opacity: 0 },
-    to: { opacity: 0 },
-    delay: 5000,
+    from: { opacity: 1, translateY: "-2em" },
   }));
   const [closeButtonSpringProps, closeButtonSpring] = useSpring(() => ({
     config: {
@@ -215,41 +242,11 @@ const FullScreenChat = () => {
       tension: 10,
       friction: 10,
     },
-    from: { opacity: 0 },
-    to: { opacity: 0 },
-    delay: 5000,
+    from: { opacity: 1, translateY: "-1em" },
   }));
 
-  useEffect(() => {
-    const width = messageContainerRef.current?.clientWidth || 0;
-    const avatarWidth = avatarRef.current?.clientWidth || 0;
-    const avatarOffsetX = 32;
-
-    if (isOpen) {
-      chatSpring.start({ x: -1 * (width + avatarWidth) });
-      avatarSpring.start({ rotateY: 0, translateX: avatarOffsetX });
-      welcomeMessageSpring.start({ opacity: 0 });
-      openButtonSpring.start({ opacity: 0 });
-      closeButtonSpring.start({ opacity: 1, translateX: 100 });
-    } else {
-      chatSpring.start({ x: 0 });
-      avatarSpring.start({
-        rotateY: 180,
-        translateX: avatarWidth,
-        delay: 3000,
-      });
-      welcomeMessageSpring.start({ opacity: 1, delay: 4000 });
-      closeButtonSpring.start({ opacity: 1, delay: 4000, translateX: 0 });
-      openButtonSpring.start({ opacity: 1, delay: 5000 });
-    }
-  }, [isOpen, chatSpring, welcomeMessageSpring, isExited]);
-
   const exit = () => {
-    chatSpring.start({ x: 0 });
-    avatarSpring.start({ translateX: 0 });
-    welcomeMessageSpring.start({ opacity: 0, delay: 1000 });
-    openButtonSpring.start({ opacity: 0, delay: 1300 });
-    closeButtonSpring.start({ opacity: 0, delay: 2000 });
+    chatSpring.start({ right: -1 * chatWindowWidth });
 
     // Wait for the animation to finish
     setTimeout(() => {
@@ -279,41 +276,40 @@ const FullScreenChat = () => {
     </button>
   );
 
+  useEffect(() => {
+    const hasExited = localStorage.getItem("chatbot-exited");
+    const hasEntered = Boolean(localStorage.getItem("chatbot-entered"));
+    if (hasExited) {
+      setIsExited(true);
+      return;
+    }
+
+    if (hasEntered) {
+      chatSpring.set({ opacity: 1 });
+      return;
+    }
+
+    const t = setTimeout(() => {
+      localStorage.setItem("chatbot-entered", "true");
+      chatSpring.start({ opacity: 1 });
+    }, 3_000);
+
+    return () => {
+      localStorage.removeItem("chatbot-entered");
+      clearTimeout(t);
+    };
+  }, []);
+
   return isExited ? (
     <RestoreIcon />
   ) : (
     <animated.div
-      id="chat-window"
-      className={styles.chatWindow}
+      id="chat-container"
+      // className={styles.chatWindow}
       style={{
-        position: "fixed",
-        bottom: 0,
-        left: "100vw",
-        zIndex: 999,
-        backdropFilter:
-          "blur(6px) brightness(50%) contrast(100%) grayscale(30%)",
-        display: "flex",
-        flexDirection: "row",
-        filter: "grayscale(0.3)",
         ...chatSpringProps,
       }}
     >
-      {/* Invisible backdrop used for closing backdrop */}
-      {isOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            right: "100%",
-            width: "100vw",
-            height: "100vh",
-            cursor: "pointer",
-            zIndex: 998,
-          }}
-          onClick={() => setIsOpen(false)}
-        />
-      )}
-
       <div
         style={{
           display: "flex",
@@ -323,16 +319,15 @@ const FullScreenChat = () => {
           overflow: "visible",
         }}
       >
+        {/* Buttons */}
         <div
+          id="chat-container--buttons"
           style={{
-            position: "absolute",
-            bottom: "3.5rem",
-            left: "-16em",
             filter: "grayscale(0.3)",
             textTransform: "uppercase",
-            zIndex: 999,
-            opacity: 0.9,
-            display: "flex",
+            // zIndex: 999,
+            // opacity: 0.9,
+            // display: "flex",
             flexDirection: "column",
             gap: "1em",
           }}
@@ -344,7 +339,17 @@ const FullScreenChat = () => {
               borderRadius: "0.68em",
               ...openButtonSpringProps,
             }}
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              chatSpring.start({
+                translateX: 0,
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+              });
+              avatarSpring.start({ rotateY: 0 });
+              welcomeMessageSpring.start({ opacity: 0 });
+              openButtonSpring.start({ opacity: 0 });
+
+              setIsOpen(true);
+            }}
           >
             Open
           </animated.button>
@@ -355,59 +360,60 @@ const FullScreenChat = () => {
               borderRadius: "0.68em",
               ...closeButtonSpringProps,
             }}
-            onClick={() => (isOpen ? setIsOpen(false) : exit())}
+            onClick={() => {
+              if (!isOpen) {
+                exit();
+                return;
+              }
+
+              chatSpring.start({
+                translateX: chatWindowWidth,
+                backdropFilter: "none",
+              });
+              avatarSpring.start({ rotateY: 180 });
+              welcomeMessageSpring.start({ opacity: 1 });
+              openButtonSpring.start({ opacity: 1 });
+
+              setIsOpen(false);
+            }}
           >
             Close
           </animated.button>
         </div>
 
-        <div ref={avatarRef}>
-          <div onClick={toggleChat} style={{ position: "relative" }}>
-            <animated.div style={welcomeMessageSpringProps}>
-              <Message
-                message="Beep boop! Have a question about dean? Ask me!"
-                direction="in"
-                simulate
-                delay={5000}
-                style={{
-                  position: "absolute",
-                  bottom: "calc(100% + 1em)",
-                  right: 50,
-                  minWidth: 200,
-                  transform: "translateX(-100%)",
-                }}
-              />
-            </animated.div>
-            <animated.div style={avatarSpringProps}>
-              <Image
-                src={ChatbotImageSrc}
-                alt="Chatbot"
-                className={styles.chatBotAvatar}
-                style={{
-                  viewTransitionName: "byte-avatar",
-                  filter: "grayscale(0.3)",
-                }}
-              />
-            </animated.div>
-          </div>
+        <div onClick={toggleChat}>
+          <animated.div style={welcomeMessageSpringProps}>
+            <Message
+              message="Beep boop! Have a question about dean? Ask me!"
+              direction="in"
+              simulate
+              delay={5000}
+            />
+          </animated.div>
+          <animated.div style={avatarSpringProps}>
+            <Image
+              src={ChatbotImageSrc}
+              alt="Chatbot"
+              // className={styles.chatBotAvatar}
+              style={{
+                filter: "grayscale(0.3)",
+                width: "100%",
+                objectPosition: "0px 40px",
+              }}
+            />
+          </animated.div>
         </div>
+
         <ChatProvider value={chatProviderValue}>
           <div
-            id="chat-container"
-            className={[
-              styles.container,
-              isRequesting ? styles.shimmer : "",
-            ].join(" ")}
             onClick={handleBackdropClick}
             ref={messageContainerRef}
             style={{
-              width: "max-content",
+              padding: "1em",
             }}
           >
-            <div className={styles.main}>
-              <Messages messages={filteredMessages} />
-              <UserInput onSubmit={addUserMessage} />
-            </div>
+            <Messages messages={filteredMessages} />
+            <UserInput onSubmit={addUserMessage} />
           </div>
         </ChatProvider>
       </div>
