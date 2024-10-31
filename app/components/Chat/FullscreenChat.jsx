@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import ChatbotImageSrc from "public/chatbot.png";
-// import styles from "./styles.module.css";
 import Message from "./Message";
 import { useBackdropFilter } from "../../contexts/backdrop-filter";
 import { useSpring, animated, config, useTransition } from "@react-spring/web";
@@ -170,7 +169,7 @@ const FullScreenChat = () => {
     lg: 400,
     xl: 440,
   };
-  const windowWidth = window.innerWidth;
+  const windowWidth = typeof window !== "undefined" ? window.innerWidth : 0;
   const size =
     windowWidth < 690
       ? "sm"
