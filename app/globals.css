@@ -20,8 +20,8 @@
   --color-divider: var(--color-mulberry-wine);
   --color-accent: var(--color-turquoise-burst);
 
-  /* --vh: 100vh;
-  --vw: 100vw; */
+  --vh: 100vh;
+  --vw: 100vw;
 }
 
 * {
