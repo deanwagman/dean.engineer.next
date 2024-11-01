@@ -191,7 +191,7 @@ const FullScreenChat = () => {
   const [chatSpringProps, chatSpring] = useSpring(() => ({
     config: config.stiff,
     from: {
-      position: "absolute",
+      position: "fixed",
       bottom: 0,
       right: 0,
       translateX: isOpen ? 0 : chatWindowWidth,
@@ -201,8 +201,8 @@ const FullScreenChat = () => {
       padding: "1em",
       borderTopLeftRadius: "10rem",
       backgroundColor:
-        size === "sm" || size === "md" || size === "lg"
-          ? "rgba(0, 0, 0, 0.5)"
+        size === "sm" || size === "md"
+          ? "rgba(0, 0, 0, 0.3)"
           : "rgba(0, 0, 0, 0)",
       backdropFilter: "blur(3px)",
     },
@@ -298,6 +298,10 @@ const FullScreenChat = () => {
       clearTimeout(t);
     };
   }, []);
+
+  // if (size === "sm" || size === "md") {
+  //   return null;
+  // }
 
   return isExited ? (
     <RestoreIcon />

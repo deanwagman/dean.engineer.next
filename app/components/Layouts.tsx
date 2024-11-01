@@ -29,6 +29,7 @@ export const DistopiaLayout = ({ children }: { children: any }) => {
       <div
         style={{
           transition: "backdrop-filter 1s ease-in-out",
+          // overflowX: "hidden",
         }}
         ref={ref}
       >
