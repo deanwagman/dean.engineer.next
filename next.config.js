@@ -15,12 +15,16 @@ const nextConfig = {
     config.resolve.alias = {
       ...config.resolve.alias,
       'three': require.resolve('three'),
+      'three/examples/jsm/controls/OrbitControls': require.resolve('three/examples/jsm/controls/OrbitControls.js'),
+    };
+    
+    // Handle Three.js examples
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      'three/examples/jsm/controls/OrbitControls': require.resolve('three/examples/jsm/controls/OrbitControls.js'),
     };
     
     return config;
-  },
-  experimental: {
-    esmExternals: 'loose',
   },
 }
 
