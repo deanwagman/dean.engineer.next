@@ -1,13 +1,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove experimental.appDir as it's now stable in Next.js 15
   transpilePackages: ['@react-pdf/renderer'],
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
+    // Handle ESM packages
     config.externals = config.externals || [];
-    config.externals.push({
-      '@react-pdf/renderer': 'commonjs @react-pdf/renderer',
-    });
+    
+    if (!isServer) {
+      config.externals.push({
+        '@react-pdf/renderer': 'commonjs @react-pdf/renderer',
+      });
+    }
+    
+    // Handle Three.js and related packages
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'three': require.resolve('three'),
+    };
+    
     return config;
+  },
+  experimental: {
+    esmExternals: 'loose',
   },
 }
 
