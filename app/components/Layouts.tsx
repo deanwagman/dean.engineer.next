@@ -10,7 +10,11 @@ import backgroundImage from "../cyber-tower-background.jpg";
 
 import styles from "./styles/layouts.module.css";
 
-const PlatformWebGL = dynamic(() => import("../components/PlatformWebGL"));
+// Make PlatformWebGL optional and disable SSR to avoid React version conflicts
+const PlatformWebGL = dynamic(() => import("../components/PlatformWebGL"), {
+  ssr: false,
+  loading: () => null,
+});
 
 export const CenterLayout = ({ children }: { children: any }) => {
   return (
@@ -84,7 +88,8 @@ export const DistopiaLayout = ({ children }: { children: any }) => {
         {children}
       </div>
       <FullscreenChatbot />
-      <PlatformWebGL />
+      {/* Only render PlatformWebGL on client side to avoid SSR issues */}
+      {typeof window !== 'undefined' && <PlatformWebGL />}
     </BackdropFilterProvider>
   );
 };
