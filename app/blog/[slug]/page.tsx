@@ -15,7 +15,13 @@ const getPostContent = (slug: string) => {
   return matterResult;
 };
 
-const Page = ({ params: { slug } }: { params: { slug: string } }) => {
+const Page = async (props: { params: Promise<{ slug: string }> }) => {
+  const params = await props.params;
+
+  const {
+    slug
+  } = params;
+
   const post = getPostContent(slug);
 
   return (

@@ -1,9 +1,6 @@
 import "./globals.css";
-import { useRouter } from "next/router";
 import { ibmPlexSans } from "./fonts";
 import Image from "next/image";
-
-import { usePathname } from "next/navigation";
 
 import ViewportSizer from "./components/ViewportSizer";
 

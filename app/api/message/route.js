@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Configuration, OpenAIApi } from "openai";
+import { OpenAI } from "openai";
 import { createParser } from "eventsource-parser";
 import { RateLimiter } from "limiter";
 
@@ -9,6 +9,11 @@ const limiter = new RateLimiter({
   tokensPerInterval,
   interval: "hour",
   fireImmediately: true,
+});
+
+// Initialize OpenAI client
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const agentPersonality = `
@@ -38,66 +43,87 @@ export async function POST(request, response) {
   }
 
   try {
-    const openAiResponse = await fetch(
-      "https://api.openai.com/v1/chat/completions",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY ?? ""}`,
-        },
-        method: "POST",
-        body: JSON.stringify({
-          model: "gpt-4",
-          messages: adaptedMessages,
-          stream: true,
-          n: 1,
-        }),
-      }
-    );
+    // Use the new Responses API with GPT-5
+    const stream = await openai.responses.create({
+      model: "gpt-5",
+      instructions: agentPersonality,
+      input: adaptedMessages,
+      stream: true,
+      max_output_tokens: 2000,
+      reasoning: {
+        effort: "minimal"
+      },
+    });
 
-    const stream = new ReadableStream({
+    const readableStream = new ReadableStream({
       async start(controller) {
-        const onParse = (event) => {
-          const { data } = event;
-
-          if (data === "[DONE]") {
-            console.log("stream complete");
-            controller.close();
-            return;
+        try {
+          console.log("🚀 Starting to process stream...");
+          let chunkCount = 0;
+          
+          for await (const chunk of stream) {
+            chunkCount++;
+            
+            // The Responses API returns delta chunks with type 'response.output_text.delta'
+            if (chunk.type === 'response.output_text.delta' && chunk.delta) {
+              const queue = encoder.encode(chunk.delta);
+              controller.enqueue(queue);
+            }
+            // Handle the final done chunk that contains the full text
+            else if (chunk.type === 'response.output_text.done' && chunk.text) {
+              const queue = encoder.encode(chunk.text);
+              controller.enqueue(queue);
+            }
           }
-
-          try {
-            const json = JSON.parse(data);
-            const text = json.choices[0].delta?.content || "";
-
-            const queue = encoder.encode(text);
-            controller.enqueue(queue);
-          } catch (error) {
-            console.error(error);
-            controller.error(error);
-          }
-        };
-
-        const parser = createParser(onParse);
-
-        for await (const chunk of openAiResponse.body) {
-          parser.feed(decoder.decode(chunk));
+          
+          controller.close();
+        } catch (error) {
+          console.error("💥 Streaming error:", error);
+          controller.error(error);
         }
       },
     });
 
-    return new Response(stream);
+    return new Response(readableStream, {
+      headers: {
+        'Content-Type': 'text/plain; charset=utf-8',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+      },
+    });
   } catch (error) {
-    return NextResponse.json(error);
+    console.error("OpenAI API Error:", error);
+    
+    // Handle specific Responses API errors
+    if (error.code === 'responses_not_enabled') {
+      return NextResponse.json({
+        error: "Responses API access not enabled for your account. Please contact OpenAI support."
+      }, { status: 403 });
+    } else if (error.code === 'invalid_response_format') {
+      return NextResponse.json({
+        error: "Response format configuration error. Please check your request parameters."
+      }, { status: 400 });
+    } else if (error.status === 429) {
+      return NextResponse.json({
+        error: "Rate limit exceeded. Please try again later."
+      }, { status: 429 });
+    } else if (error.status === 401) {
+      return NextResponse.json({
+        error: "Invalid API key. Please check your OpenAI API key."
+      }, { status: 401 });
+    }
+    
+    return NextResponse.json({
+      error: "An error occurred while processing your request."
+    }, { status: 500 });
   }
 }
 
 // Notes:
-// - We recieve a request from the client with a list of messages
-// - We create a new ReadableStream
-// - We create a request to OpenAI with the messages
-// - The OpenAI API returns a response with a ReadableStream
-// - We parse each chunk of the response and enqueue it to the stream
-// - We return the stream to the client
-// - The client recieves the stream and parses each chunk
-// - The client adds each chunk to the correct message
+// - We receive a request from the client with a list of messages
+// - We use the new OpenAI Responses API with GPT-5
+// - The API returns streaming chunks with type 'response.output_text.delta'
+// - We process each delta chunk and extract text from the 'delta' field
+// - We return the stream to the client with proper headers
+// - The client receives the stream and parses each chunk
+// - Enhanced error handling for Responses API specific errors
