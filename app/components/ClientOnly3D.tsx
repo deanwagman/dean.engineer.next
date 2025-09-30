@@ -1,14 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
 
-// Completely isolate 3D components from SSR
-const PlatformWebGL = dynamic(() => import("./PlatformWebGL"), {
-  ssr: false,
-  loading: () => null,
-});
-
+// Temporarily disable 3D components to fix React version conflicts
+// This can be re-enabled once the build issues are resolved
 const ClientOnly3D = () => {
   const [isClient, setIsClient] = useState(false);
 
@@ -16,12 +11,15 @@ const ClientOnly3D = () => {
     setIsClient(true);
   }, []);
 
-  // Only render on client side after hydration
-  if (!isClient) {
-    return null;
-  }
+  // Temporarily return null to avoid React version conflicts
+  // TODO: Re-enable 3D components once build issues are resolved
+  return null;
 
-  return <PlatformWebGL />;
+  // Original code (commented out for now):
+  // if (!isClient) {
+  //   return null;
+  // }
+  // return <PlatformWebGL />;
 };
 
 export default ClientOnly3D;
