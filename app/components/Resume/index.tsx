@@ -45,7 +45,7 @@ const Resume = () => {
             Senior Software Engineer
           </h2>
           <div style={{ fontSize: "1rem", color: "#666", lineHeight: "1.6" }}>
-            <p>📧 dean@dean.engineer</p>
+            <p>📧 deanwagman@gmail.com</p>
             <p>📱 +1 (407) 325-9770</p>
             <p>🌐 https://dean.engineer/</p>
             <p>📍 San Francisco, CA</p>
