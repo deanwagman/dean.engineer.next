@@ -25,20 +25,33 @@ deanwagman@gmail.com
 +1 (407) 325-9770
 
 ## Summary
-Experienced Senior Software Engineer specializing in full-stack development, technical leadership, and cross-functional collaboration. Skilled in TypeScript, NestJS, NextJS, Python, Express.js, React Native (including Expo), and AWS. Adept at gathering and refining requirements, challenging assumptions, and delivering high-impact solutions. Passionate about driving innovation, improving workflows, and mentoring teams to success. Advocate for Agile methodologies to enhance productivity and align development with business goals.
+# Summary
+
+Senior Software Engineer with 13 years of experience delivering scalable, user-centric applications across web, mobile, and 3D platforms. Skilled in React, TypeScript, NestJS, and modern cloud architectures, with proven success leading projects from concept to deployment. Experienced in building **interactive visualization systems**, optimizing **real-time data flows**, and driving responsive design across diverse devices and large-scale displays. Adept at collaborating with cross-functional teams, mentoring engineers, and advancing Agile practices to deliver high-quality solutions. Strong advocate for performance, maintainability, and creating products that empower end users.
 
 ## Skills
-- **Full-Stack Development**: JavaScript, TypeScript, React, React Native, NestJS, NextJS, Node.js, Python, Express.js
-- **UI/UX Design**: Material UI, Responsive Design, Component Libraries (including experience building custom component libraries)
-- **Cloud & DevOps**: AWS (EC2, RDS, S3, Lambda), Docker, Containerization, CI/CD, CDK for Terraform
-- **Backend & APIs**: RESTful Services, GraphQL, Microservices Architecture
-- **Database Management**: SQL, PostgreSQL, TypeORM, NoSQL Databases
-- **Version Control & Collaboration**: Git, GitHub, Bitbucket, Code Reviews
-- **Agile Methodologies**: Scrum, Kanban, Sprint Planning, Iteration Cycles
-- **Testing & Quality Assurance**: Unit Testing, Integration Testing, Automated Testing Frameworks
-- **Tooling & Workflow Optimization**: JIRA, Confluence, Trello, Continuous Integration
+
+- **Full-Stack Development:** JavaScript, TypeScript, React, NestJS, Node.js  
+- **UI/UX Design:** Material UI, Responsive Design, Component Libraries  
+- **3D Visualization & Real-Time Systems:** CesiumJS, WebSockets, Service Workers  
+- **Cloud & DevOps:** AWS (EC2, RDS), Containerization, CI/CD  
+- **Backend & APIs:** RESTful Services, GraphQL, Microservices Architecture  
+- **Database Management:** SQL, PostgreSQL, NoSQL Databases  
+- **Version Control & Collaboration:** Git, GitHub, Bitbucket, Code Reviews  
+- **Agile Methodologies:** Scrum, Kanban, Sprint Planning, Iteration Cycles  
+- **Testing & Quality Assurance:** Unit Testing, Integration Testing, Playwright, Automated Testing Frameworks  
+- **Tooling & Workflow Optimization:** JIRA, Confluence, Trello, Continuous Integration  
 
 ## Professional Experience
+
+**Beacon AI | Sr. Software Engineer | December 2024 - September 2025**  
+- Drove the development of **high-performance web applications** with a focus on scalability, maintainability, and end-user experience.  
+- Designed and implemented **interactive data visualizations** using modern JavaScript frameworks and 3D rendering libraries, enabling real-time insights from complex datasets.  
+- Optimized **front-end architecture** in React and TypeScript, improving responsiveness across large displays and diverse device types.  
+- Strengthened system reliability by integrating **end-to-end test automation** (Playwright) into the CI/CD pipeline.  
+- Collaborated closely with product, design, and engineering teams to refine requirements, streamline workflows, and deliver features aligned with customer needs.  
+- Specialized in **CesiumJS, WebSockets, Service Workers, and advanced visualization tooling**, applying them to build performant, user-focused solutions.  
+
 **MOXION POWER | Senior Software Engineer / Manufacturing Apps Tech Lead** | October 2023 - August 2024
 - Led the end-to-end development of "Unity," a full-stack application for manufacturing teams to track Battery Units throughout their lifecycle. Engaged with stakeholders to gather requirements, challenge assumptions, and refine features. Migrated teams from spreadsheets to a unified platform on AWS, improving collaboration and scalability.
 - Architected a robust resource filtering system for managing Battery Units, Rental Reservations, Faults, Alerts, Accounts, and Users. Included advanced features like saving/sharing filters and integrated pagination for optimized performance.
@@ -85,32 +98,6 @@ LinkedIn: linkedin.com/in/deanwagman
 Location: San Francisco, California
 GitHub: github.com/deanwagman
 Availability: Currently seeking new opportunities in software engineering. Please feel free to contact me regarding potential projects or collaborations.
-
----
-
-Tesla Project highlights:
-
-# Overview of My Work at Tesla
-
-## 1. Scaling Applications with Internal Libraries and Reusable Components
-At Tesla, one of my key contributions was scaling applications by developing internal libraries and reusable components, which improved code reusability by approximately 30%. I created a structured approach for identifying reusable components, documented them comprehensively, and integrated them across multiple projects. This effort significantly enhanced consistency and efficiency, allowing teams to focus on feature development rather than reinventing solutions.
-
-## 2. Internationalization and Multi-Currency Support
-I was part of the team focusing on internationalization for Tesla's applications, supporting more than 10 languages during new launches. This included displaying multiple currencies for different regions, crucial for rolling out Tesla vehicles in new international markets. My work involved ensuring that text strings were accurately translated, displaying legal and regulatory information, and expanding localization metrics, such as currencies and units. Additionally, I contributed to front-end support for cryptocurrencies like Bitcoin and (not released) Dogecoin, which required updating internal tools and libraries like TDS (Tesla Design System) to accommodate new languages and conventions. I coordinated with stakeholders globally to ensure accurate localization and currency conversions, resulting in an enhanced user experience for Tesla's international customers.
-
-## 3. Development of a React Native iPad Application for Test Drive Scheduling
-I developed a React Native iPad application to streamline vehicle test drive scheduling. This involved integrating backend services, ensuring data synchronization, and optimizing the app for a smooth and intuitive user interface. The application simplified the test drive process, making it easier for both sales associates and customers to schedule and manage test drives efficiently.
-
-## 4. Leading the Styling of the Vehicle Ordering Experience for Mobile Applications
-I led the styling of the vehicle ordering experience in Tesla's mobile applications, working with a team of junior engineers. I provided mentorship, conducted code reviews, and ensured adherence to best practices, significantly improving design consistency across platforms. This effort resulted in a more cohesive and user-friendly interface, contributing to a better overall customer experience.
-
-## 5. Resolving Performance Issues to Improve App Speed by 20%
-I took on performance optimization challenges, increasing app speed by 20% through research and iteration. I used profiling tools to identify performance bottlenecks and implemented several optimizations, including lazy loading and efficient data fetching. These improvements led to a smoother, more responsive application, enhancing the user experience.
-
-# Current Projects and Continued Growth
-Since leaving Tesla, I have continued to work on a diverse range of web and mobile projects, focusing on JavaScript, TypeScript, React, React Native, and scalable UI architectures. These projects involve bridging design and development, creating consistent and high-quality user interfaces, and balancing visual quality with performance and scalability. I am committed to staying at the forefront of technology and constantly improving my skills to deliver impactful solutions.
-
-
 
 `;
 
