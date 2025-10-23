@@ -14,10 +14,10 @@ const Messages = ({ messages = [] }) => {
 
   return (
     <div className={styles.messages} ref={messagesContainerRef}>
-      {messages.map(({ content, role }, index) => {
+      {messages.map(({ content, role, id }) => {
         return (
           <Message
-            key={index}
+            key={id}
             message={content}
             direction={role === "assistant" ? "in" : "out"}
           />

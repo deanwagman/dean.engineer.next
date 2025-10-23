@@ -87,6 +87,10 @@
   border-inline-start: 0.5em solid var(--color-accent);
   padding-inline-start: 1em;
   padding-inline-end: 1em;
+
+  p {
+    text-align: left;
+  }
 }
 
 .message:first-child {

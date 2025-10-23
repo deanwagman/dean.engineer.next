@@ -64,16 +64,13 @@ export async function POST(request, response) {
           for await (const chunk of stream) {
             chunkCount++;
             
-            // The Responses API returns delta chunks with type 'response.output_text.delta'
+            // Only process delta chunks for streaming updates
             if (chunk.type === 'response.output_text.delta' && chunk.delta) {
               const queue = encoder.encode(chunk.delta);
               controller.enqueue(queue);
             }
-            // Handle the final done chunk that contains the full text
-            else if (chunk.type === 'response.output_text.done' && chunk.text) {
-              const queue = encoder.encode(chunk.text);
-              controller.enqueue(queue);
-            }
+            // Ignore the done chunk since we've already sent all the text via deltas
+            // The done chunk contains the complete text which would duplicate everything
           }
           
           controller.close();

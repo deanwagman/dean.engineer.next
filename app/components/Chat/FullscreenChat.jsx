@@ -12,6 +12,7 @@ import UserInput from "./UserInput";
 import { ChatProvider } from "../../contexts/chat";
 import chatBotCreationPrompt from "../../prompts/chatBot";
 import { nanoid } from "nanoid";
+import styles from "./styles.module.css";
 
 const defaultIntroMessage = `
 Hey there, wanderer of the digital universe! Welcome onboard.🚀 You've docked at Dean's cyberspace station, your one-stop hub for all things software engineering and web development. I'm Byte, your friendly cyber companion, ready to serve up answers and insights in byte-sized (pun totally intended!) doses. Intrigued by Dean's tech expertise or in need of some web wisdom? Let's dive right in. Ready to surf the code waves with me? 🤖🌊
@@ -57,6 +58,7 @@ const FullScreenChat = () => {
 
   const messageContainerRef = useRef();
   const avatarRef = useRef();
+  const isRequestingRef = useRef(false);
 
   const onEscape = (event) => {
     if (event.key === "Escape" && isOpen) {
@@ -98,6 +100,11 @@ const FullScreenChat = () => {
 
   useEffect(() => {
     const request = async () => {
+      if (isRequestingRef.current) {
+        return; // Already processing a request
+      }
+      
+      isRequestingRef.current = true;
       setIsRequesting(true);
 
       const encoder = new TextEncoder();
@@ -117,8 +124,6 @@ const FullScreenChat = () => {
           content: "",
         });
 
-        setIsRequesting(false);
-
         setMessages((messages) => [...messages, newMessage]);
 
         while (true) {
@@ -132,7 +137,11 @@ const FullScreenChat = () => {
 
           updateMessage(newMessage.id, (prevText) => prevText + text);
         }
+        
+        isRequestingRef.current = false;
+        setIsRequesting(false);
       } catch (error) {
+        isRequestingRef.current = false;
         setIsRequesting(false);
         console.error(error);
       }
@@ -333,6 +342,7 @@ const FullScreenChat = () => {
             // display: "flex",
             flexDirection: "column",
             gap: "1em",
+            paddingTop: "3em",
           }}
         >
           <animated.button
@@ -411,8 +421,14 @@ const FullScreenChat = () => {
           <div
             onClick={handleBackdropClick}
             ref={messageContainerRef}
+            className={isRequesting ? styles.shimmer : ""}
             style={{
               padding: "1em",
+              display: "flex",
+              flexDirection: "column",
+              height: "100vh",
+              maxHeight: "100vh",
+              overflow: "hidden",
             }}
           >
             <Messages messages={filteredMessages} />
