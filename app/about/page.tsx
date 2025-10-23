@@ -23,44 +23,13 @@ const Page = () => {
             }}
             placeholder="blur"
           />
-          <p>
-            Hello, my name is Dean, and I’m a Senior Software Engineer based in
-            San Francisco, California. I specialize in full-stack development
-            with a strong emphasis on UI engineering. My expertise lies in
-            front-end technologies such as React, React Native, and Redux,
-            complemented by back-end experience in frameworks like NestJS,
-            Symfony, and Laravel.
-          </p>
+          <p>Hey, I’m Dean — a Senior Software Engineer based in San Francisco. I build full-stack applications with a focus on clean architecture, great design, and smooth user experiences. Most of my work centers around React, TypeScript, and modern Node frameworks, but I like working across the stack when it helps move things forward.</p>
 
-          <p>
-            With over 10 years of industry experience, I’ve had the privilege of
-            working with leading companies such as Tesla, Uber, and Moxion
-            Power. My journey in software engineering has fueled my passion for
-            crafting elegant, performant, and scalable solutions to complex
-            problems, always with an eye on creating delightful user
-            experiences.
-          </p>
+          <p>Over the years I’ve worked with teams at Tesla, Uber, Moxion Power, and Beacon AI, tackling everything from large-scale web systems to internal tools. I care about building software that’s reliable, maintainable, and feels good to use.</p>
 
-          <p>
-            What sets me apart is my ability to seamlessly blend technical
-            expertise with a keen design perspective, allowing me to approach
-            challenges holistically. I’m continually exploring new technologies
-            and methodologies to push the boundaries of what’s possible in
-            software development.
-          </p>
+          <p>When I’m not coding, I’m usually outdoors — camping, hiking, or on a road trip somewhere new. It’s how I reset and get fresh perspective on what I’m building next.</p>
 
-          <p>
-            Outside of work, you’ll find me embracing the great outdoors through
-            hiking, camping, and road trips. Adventure calls to me, and I love
-            discovering new places and experiences. I’m also an active
-            participant in the tech community, regularly attending meetups and
-            collaborating with fellow developers to learn and grow.
-          </p>
-
-          <p>
-            If you’re interested in collaborating or simply want to connect,
-            don’t hesitate to reach out!
-          </p>
+          <p>If you’d like to connect or collaborate, feel free to reach out.</p>
         </article>
       </CenterLayout>
     </DistopiaLayout>
