@@ -70,6 +70,17 @@ const Page = () => {
           <h2>Professional Experience</h2>
 
           <h3 className={orbitron.className}>
+            Swamp Labs <br />
+            SoftwareEngineer <br />
+            December 2024 – Current
+          </h3>
+          <ul>
+            <li>We design and build iOS and web applications that are reliable, fast, and thoughtfully made.</li>
+            <li>Our work balances clean design with practical engineering, focusing on clarity and long-term maintainability.</li>
+            <li>We care about the details — how things look, feel, and perform in the real world.</li>
+          </ul>
+
+          <h3 className={orbitron.className}>
             Beacon AI <br />
             Senior Software Engineer <br />
             December 2024 – September 2025

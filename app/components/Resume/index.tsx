@@ -12,10 +12,10 @@ const Resume = () => {
 
   if (!isClient) {
     return (
-      <div style={{ 
-        height: "100vh", 
-        display: "flex", 
-        alignItems: "center", 
+      <div style={{
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
         justifyContent: "center",
         background: "white",
         color: "black"
@@ -26,9 +26,9 @@ const Resume = () => {
   }
 
   return (
-    <div style={{ 
-      height: "100vh", 
-      width: "100vw", 
+    <div style={{
+      height: "100vh",
+      width: "100vw",
       background: "white",
       color: "black",
       padding: "2rem",
@@ -58,9 +58,9 @@ const Resume = () => {
             Professional Summary
           </h3>
           <p style={{ fontSize: "1rem", lineHeight: "1.6", textAlign: "justify" }}>
-            Experienced Senior Software Engineer specializing in full-stack development, technical leadership, and cross-functional collaboration. 
-            Skilled in TypeScript, NestJS, NextJS, Python, Express.js, React Native (including Expo), and AWS. Adept at gathering and refining 
-            requirements, challenging assumptions, and delivering high-impact solutions. Passionate about driving innovation, improving workflows, 
+            Experienced Senior Software Engineer specializing in full-stack development, technical leadership, and cross-functional collaboration.
+            Skilled in TypeScript, NestJS, NextJS, Python, Express.js, React Native (including Expo), and AWS. Adept at gathering and refining
+            requirements, challenging assumptions, and delivering high-impact solutions. Passionate about driving innovation, improving workflows,
             and mentoring teams to success. Advocate for Agile methodologies to enhance productivity and align development with business goals.
           </p>
         </section>
@@ -95,7 +95,23 @@ const Resume = () => {
           <h3 style={{ fontSize: "1.5rem", color: "#CD5C5C", marginBottom: "1rem", fontWeight: "bold", borderBottom: "1px solid #F08080", paddingBottom: "0.5rem" }}>
             Professional Experience
           </h3>
-          
+
+
+          <div style={{ marginBottom: "1.5rem" }}>
+            <h4 style={{ fontSize: "1.3rem", color: "#65000B", marginBottom: "0.5rem", fontWeight: "bold" }}>
+              Software Engineer
+            </h4>
+            <p style={{ fontSize: "1rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>
+              Swamp Labs | San Francisco, CA / Orlando, FL | December 2024 - Current
+            </p>
+            <ul style={{ fontSize: "1rem", lineHeight: "1.6", marginLeft: "1rem" }}>
+              <li>We design and build iOS and web applications that are reliable, fast, and thoughtfully made.</li>
+              <li>Our work balances clean design with practical engineering, focusing on clarity and long-term maintainability.</li>
+              <li>We care about the details — how things look, feel, and perform in the real world.</li>
+            </ul>
+          </div>
+
+
           <div style={{ marginBottom: "1.5rem" }}>
             <h4 style={{ fontSize: "1.3rem", color: "#65000B", marginBottom: "0.5rem", fontWeight: "bold" }}>
               Senior Software Engineer
@@ -177,7 +193,7 @@ const Resume = () => {
 
         {/* Print Button */}
         <div style={{ textAlign: "center", marginTop: "2rem", paddingTop: "1rem", borderTop: "1px solid #ddd" }}>
-          <button 
+          <button
             onClick={() => window.print()}
             style={{
               backgroundColor: "#65000B",
@@ -193,8 +209,8 @@ const Resume = () => {
             Print Resume
           </button>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 };
 
