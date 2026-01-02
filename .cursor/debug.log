@@ -399,3 +399,5 @@
 {"location":"Resume/index.tsx:8","message":"Before destructuring resumeData","data":{"hasResumeData":true},"timestamp":1767385742085,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
 {"location":"Resume/index.tsx:8","message":"resumeData destructured successfully","data":{"hasHeader":true,"hasSummary":true,"hasSkills":true,"hasExperience":true,"hasEducation":true},"timestamp":1767385742085,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
 {"location":"Resume/index.tsx:8","message":"Rendering main resume content","data":{},"timestamp":1767385742085,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
+{"location":"resume/page.tsx:8","message":"Loading state rendered","data":{},"timestamp":1767389034004,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"resume/page.tsx:8","message":"Page component rendered","data":{},"timestamp":1767389034000,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}

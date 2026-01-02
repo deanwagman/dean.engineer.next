@@ -99,9 +99,9 @@ const Resume = () => {
     // #region agent log
     log('resumeData destructured successfully', { hasHeader: !!header, hasSummary: !!summary, hasSkills: !!skills, hasExperience: !!experience, hasEducation: !!education });
     // #endregion
-  } catch (error) {
+  } catch (error: any) {
     // #region agent log
-    log('resumeData destructuring error', { error: error.message, stack: error.stack });
+    log('resumeData destructuring error', { error: error?.message, stack: error?.stack });
     // #endregion
     throw error;
   }
