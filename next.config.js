@@ -5,11 +5,8 @@ const nextConfig = {
     // Handle ESM packages
     config.externals = config.externals || [];
     
-    if (!isServer) {
-      config.externals.push({
-        '@react-pdf/renderer': 'commonjs @react-pdf/renderer',
-      });
-    }
+    // Don't externalize @react-pdf/renderer for client-side - it needs to be bundled
+    // The package will be transpiled and bundled properly
     
     // Handle Three.js and related packages
     config.resolve.alias = {

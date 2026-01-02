@@ -1,16 +1,81 @@
 "use client";
 
+// #region agent log
+const log = (msg: string, data: any) => { fetch('http://127.0.0.1:7243/ingest/d660db73-b79e-4303-86a5-191f6c312f66',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'Resume/index.tsx:8',message:msg,data:data,timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'B'})}).catch(()=>{}); };
+// #endregion
+
 import React, { useState, useEffect } from "react";
+
+// #region agent log
+log('Before resumeData import', {});
+// #endregion
+import { resumeData } from "./resumeData";
+// #region agent log
+log('resumeData imported', { hasData: !!resumeData, keys: resumeData ? Object.keys(resumeData) : [] });
+// #endregion
 
 // Main Resume component with professional HTML layout
 const Resume = () => {
+  // #region agent log
+  log('Resume component function called', {});
+  // #endregion
   const [isClient, setIsClient] = useState(false);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
   useEffect(() => {
+    // #region agent log
+    log('useEffect called, setting isClient to true', {});
+    // #endregion
     setIsClient(true);
   }, []);
 
+  const handleDownloadPDF = async () => {
+    // #region agent log
+    log('handleDownloadPDF called', {});
+    // #endregion
+    setIsGeneratingPDF(true);
+    try {
+      // #region agent log
+      log('Before dynamic PDF imports', {});
+      // #endregion
+      // Lazy load PDF dependencies only when needed
+      const [{ pdf }, { default: ResumePDF }] = await Promise.all([
+        import("@react-pdf/renderer"),
+        import("./ResumePDF")
+      ]);
+      // #region agent log
+      log('PDF imports loaded', { hasPdf: typeof pdf === 'function', hasResumePDF: !!ResumePDF });
+      // #endregion
+      // #region agent log
+      log('Before pdf() call', {});
+      // #endregion
+      const blob = await pdf(<ResumePDF />).toBlob();
+      // #region agent log
+      log('pdf() call success', { blobSize: blob?.size });
+      // #endregion
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "Dean_Wagman_Resume.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (error: any) {
+      // #region agent log
+      log('PDF generation error', { error: error?.message, stack: error?.stack });
+      // #endregion
+      console.error("Error generating PDF:", error);
+      alert("Failed to generate PDF. Please try again.");
+    } finally {
+      setIsGeneratingPDF(false);
+    }
+  };
+
   if (!isClient) {
+    // #region agent log
+    log('Rendering loading state (isClient=false)', {});
+    // #endregion
     return (
       <div style={{
         height: "100vh",
@@ -25,6 +90,25 @@ const Resume = () => {
     );
   }
 
+  // #region agent log
+  log('Before destructuring resumeData', { hasResumeData: !!resumeData });
+  // #endregion
+  let header, summary, skills, experience, education;
+  try {
+    ({ header, summary, skills, experience, education } = resumeData);
+    // #region agent log
+    log('resumeData destructured successfully', { hasHeader: !!header, hasSummary: !!summary, hasSkills: !!skills, hasExperience: !!experience, hasEducation: !!education });
+    // #endregion
+  } catch (error) {
+    // #region agent log
+    log('resumeData destructuring error', { error: error.message, stack: error.stack });
+    // #endregion
+    throw error;
+  }
+
+  // #region agent log
+  log('Rendering main resume content', {});
+  // #endregion
   return (
     <div style={{
       height: "100vh",
@@ -39,16 +123,16 @@ const Resume = () => {
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "2rem", borderBottom: "2px solid #65000B", paddingBottom: "1rem" }}>
           <h1 style={{ fontSize: "2.5rem", color: "#65000B", marginBottom: "0.5rem", fontWeight: "bold" }}>
-            Dean Wagman
+            {header.name}
           </h1>
           <h2 style={{ fontSize: "1.5rem", color: "#CD5C5C", marginBottom: "1rem", fontWeight: "bold" }}>
-            Senior Software Engineer
+            {header.title}
           </h2>
           <div style={{ fontSize: "1rem", color: "#666", lineHeight: "1.6" }}>
-            <p>📧 deanwagman@gmail.com</p>
-            <p>📱 +1 (407) 325-9770</p>
-            <p>🌐 https://dean.engineer/</p>
-            <p>📍 San Francisco, CA</p>
+            <p>📧 {header.contact.email}</p>
+            <p>📱 {header.contact.phone}</p>
+            <p>🌐 {header.contact.website}</p>
+            <p>📍 {header.contact.location}</p>
           </div>
         </div>
 
@@ -58,10 +142,7 @@ const Resume = () => {
             Professional Summary
           </h3>
           <p style={{ fontSize: "1rem", lineHeight: "1.6", textAlign: "justify" }}>
-            Experienced Senior Software Engineer specializing in full-stack development, technical leadership, and cross-functional collaboration.
-            Skilled in TypeScript, NestJS, NextJS, Python, Express.js, React Native (including Expo), and AWS. Adept at gathering and refining
-            requirements, challenging assumptions, and delivering high-impact solutions. Passionate about driving innovation, improving workflows,
-            and mentoring teams to success. Advocate for Agile methodologies to enhance productivity and align development with business goals.
+            {summary}
           </p>
         </section>
 
@@ -73,19 +154,19 @@ const Resume = () => {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem" }}>
             <div>
               <h4 style={{ fontSize: "1.2rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>Languages</h4>
-              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>JavaScript, TypeScript, Python, Java, C++, Go</p>
+              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>{skills.languages}</p>
             </div>
             <div>
               <h4 style={{ fontSize: "1.2rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>Frameworks</h4>
-              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>React, Next.js, Node.js, Express, NestJS, React Native</p>
+              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>{skills.frameworks}</p>
             </div>
             <div>
               <h4 style={{ fontSize: "1.2rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>Databases</h4>
-              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>PostgreSQL, MongoDB, Redis, MySQL</p>
+              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>{skills.databases}</p>
             </div>
             <div>
               <h4 style={{ fontSize: "1.2rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>Cloud & Tools</h4>
-              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>AWS, Vercel, Docker, Kubernetes, Git, Webpack, Three.js, WebGL, OpenAI API, Playwright</p>
+              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>{skills.cloudTools}</p>
             </div>
           </div>
         </section>
@@ -95,85 +176,21 @@ const Resume = () => {
           <h3 style={{ fontSize: "1.5rem", color: "#CD5C5C", marginBottom: "1rem", fontWeight: "bold", borderBottom: "1px solid #F08080", paddingBottom: "0.5rem" }}>
             Professional Experience
           </h3>
-
-
-          <div style={{ marginBottom: "1.5rem" }}>
-            <h4 style={{ fontSize: "1.3rem", color: "#65000B", marginBottom: "0.5rem", fontWeight: "bold" }}>
-              Software Engineer
-            </h4>
-            <p style={{ fontSize: "1rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>
-              Swamp Labs | San Francisco, CA / Orlando, FL | December 2024 - Current
-            </p>
-            <ul style={{ fontSize: "1rem", lineHeight: "1.6", marginLeft: "1rem" }}>
-              <li>We design and build iOS and web applications that are reliable, fast, and thoughtfully made.</li>
-              <li>Our work balances clean design with practical engineering, focusing on clarity and long-term maintainability.</li>
-              <li>We care about the details — how things look, feel, and perform in the real world.</li>
-            </ul>
-          </div>
-
-
-          <div style={{ marginBottom: "1.5rem" }}>
-            <h4 style={{ fontSize: "1.3rem", color: "#65000B", marginBottom: "0.5rem", fontWeight: "bold" }}>
-              Senior Software Engineer
-            </h4>
-            <p style={{ fontSize: "1rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>
-              Beacon AI | San Francisco, CA | December 2024 - September 2025
-            </p>
-            <ul style={{ fontSize: "1rem", lineHeight: "1.6", marginLeft: "1rem" }}>
-              <li>Drove the development of high-performance web applications with a focus on scalability, maintainability, and end-user experience</li>
-              <li>Designed and implemented interactive data visualizations using modern JavaScript frameworks and 3D rendering libraries</li>
-              <li>Optimized front-end architecture in React and TypeScript, improving responsiveness across large displays and diverse device types</li>
-              <li>Strengthened system reliability by integrating end-to-end test automation (Playwright) into the CI/CD pipeline</li>
-              <li>Specialized in CesiumJS, WebSockets, Service Workers, and advanced visualization tooling</li>
-            </ul>
-          </div>
-
-          <div style={{ marginBottom: "1.5rem" }}>
-            <h4 style={{ fontSize: "1.3rem", color: "#65000B", marginBottom: "0.5rem", fontWeight: "bold" }}>
-              Senior Software Engineer / Manufacturing Apps Tech Lead
-            </h4>
-            <p style={{ fontSize: "1rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>
-              Moxion Power | San Francisco, CA | October 2023 - August 2024
-            </p>
-            <ul style={{ fontSize: "1rem", lineHeight: "1.6", marginLeft: "1rem" }}>
-              <li>Led the end-to-end development of "Unity," a full-stack application for manufacturing teams to track Battery Units</li>
-              <li>Architected a robust resource filtering system for managing Battery Units, Rental Reservations, Faults, Alerts, Accounts, and Users</li>
-              <li>Developed a comprehensive PDF document generation system, allowing users to create customized templates</li>
-              <li>Engineered a File Upload workflow supporting drag-and-drop, file selection, and pasting functionalities</li>
-              <li>Served as Tech Lead for manufacturing applications, making architectural decisions and providing support</li>
-            </ul>
-          </div>
-
-          <div style={{ marginBottom: "1.5rem" }}>
-            <h4 style={{ fontSize: "1.3rem", color: "#65000B", marginBottom: "0.5rem", fontWeight: "bold" }}>
-              Senior Software Engineer
-            </h4>
-            <p style={{ fontSize: "1rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>
-              Tesla | San Francisco, CA | November 2020 - December 2022
-            </p>
-            <ul style={{ fontSize: "1rem", lineHeight: "1.6", marginLeft: "1rem" }}>
-              <li>Scaled applications by developing internal libraries and reusable components, improving code reusability by 30%</li>
-              <li>Managed internationalization for applications, supporting 10+ languages for new launches</li>
-              <li>Developed a React Native iPad application for scheduling vehicle test drives</li>
-              <li>Led the styling of the vehicle ordering web application experience in mobile applications</li>
-              <li>Resolved performance issues through research and iteration, increasing app speed by 20%</li>
-            </ul>
-          </div>
-
-          <div style={{ marginBottom: "1.5rem" }}>
-            <h4 style={{ fontSize: "1.3rem", color: "#65000B", marginBottom: "0.5rem", fontWeight: "bold" }}>
-              Software Engineer
-            </h4>
-            <p style={{ fontSize: "1rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>
-              Uber Eats | San Francisco, CA | April 2019 - May 2020
-            </p>
-            <ul style={{ fontSize: "1rem", lineHeight: "1.6", marginLeft: "1rem" }}>
-              <li>Led and delivered the development of the Promotions feature, enabling users to benefit from special offers</li>
-              <li>Led and developed the storefront filtering system, allowing users to filter feeds by rating, price, dietary restrictions</li>
-              <li>Collaborated with design and product teams to ensure efficient project delivery</li>
-              <li>Supported the rollout of a redesigned application utilizing internal libraries and tools</li>
-            </ul>
-          </div>
+          {experience.map((job, index) => (
+            <div key={index} style={{ marginBottom: "1.5rem" }}>
+              <h4 style={{ fontSize: "1.3rem", color: "#65000B", marginBottom: "0.5rem", fontWeight: "bold" }}>
+                {job.title}
+              </h4>
+              <p style={{ fontSize: "1rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>
+                {job.company} | {job.location} | {job.period}
+              </p>
+              <ul style={{ fontSize: "1rem", lineHeight: "1.6", marginLeft: "1rem" }}>
+                {job.bullets.map((bullet, bulletIndex) => (
+                  <li key={bulletIndex}>{bullet}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </section>
 
         {/* Education */}
@@ -183,16 +200,16 @@ const Resume = () => {
           </h3>
           <div>
             <h4 style={{ fontSize: "1.3rem", color: "#65000B", marginBottom: "0.5rem", fontWeight: "bold" }}>
-              Bachelor of Arts in Humanities/Humanistic Studies
+              {education.degree}
             </h4>
             <p style={{ fontSize: "1rem", color: "#F08080", fontWeight: "bold" }}>
-              Florida State University | 2012
+              {education.school} | {education.year}
             </p>
           </div>
         </section>
 
-        {/* Print Button */}
-        <div style={{ textAlign: "center", marginTop: "2rem", paddingTop: "1rem", borderTop: "1px solid #ddd" }}>
+        {/* Print and Download Buttons */}
+        <div style={{ textAlign: "center", marginTop: "2rem", paddingTop: "1rem", borderTop: "1px solid #ddd", display: "flex", gap: "1rem", justifyContent: "center" }}>
           <button
             onClick={() => window.print()}
             style={{
@@ -207,6 +224,23 @@ const Resume = () => {
             }}
           >
             Print Resume
+          </button>
+          <button
+            onClick={handleDownloadPDF}
+            disabled={isGeneratingPDF}
+            style={{
+              backgroundColor: isGeneratingPDF ? "#999" : "#65000B",
+              color: "white",
+              padding: "0.75rem 1.5rem",
+              border: "none",
+              borderRadius: "0.5rem",
+              fontSize: "1rem",
+              cursor: isGeneratingPDF ? "not-allowed" : "pointer",
+              fontWeight: "bold",
+              opacity: isGeneratingPDF ? 0.6 : 1
+            }}
+          >
+            {isGeneratingPDF ? "Generating PDF..." : "Download PDF"}
           </button>
         </div>
       </div >
