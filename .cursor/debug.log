@@ -401,3 +401,5 @@
 {"location":"Resume/index.tsx:8","message":"Rendering main resume content","data":{},"timestamp":1767385742085,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
 {"location":"resume/page.tsx:8","message":"Loading state rendered","data":{},"timestamp":1767389034004,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
 {"location":"resume/page.tsx:8","message":"Page component rendered","data":{},"timestamp":1767389034000,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"resume/page.tsx:8","message":"Page component rendered","data":{},"timestamp":1767390127798,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"resume/page.tsx:8","message":"Loading state rendered","data":{},"timestamp":1767390127804,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
