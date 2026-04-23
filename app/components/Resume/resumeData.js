@@ -6,7 +6,7 @@ export const resumeData = {
       email: "deanwagman@gmail.com",
       phone: "+1 (407) 325-9770",
       website: "https://dean.engineer/",
-      location: "San Francisco, CA",
+      location: "Orlando, FL",
     },
   },
   summary:
@@ -22,7 +22,7 @@ export const resumeData = {
     {
       title: "Software Engineer",
       company: "Swamp Labs",
-      location: "San Francisco, CA / Orlando, FL",
+      location: "Orlando, FL",
       period: "December 2024 - Current",
       bullets: [
         "We design and build iOS and web applications that are reliable, fast, and thoughtfully made.",

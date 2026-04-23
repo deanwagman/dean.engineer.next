@@ -23,7 +23,7 @@ const Page = () => {
             }}
             placeholder="blur"
           />
-          <p>Hey, I’m Dean — a Senior Software Engineer based in San Francisco. I build full-stack applications with a focus on clean architecture, great design, and smooth user experiences. Most of my work centers around React, TypeScript, and modern Node frameworks, but I like working across the stack when it helps move things forward.</p>
+          <p>Hey, I’m Dean — a Senior Software Engineer based in Orlando, Florida. I build full-stack applications with a focus on clean architecture, great design, and smooth user experiences. Most of my work centers around React, TypeScript, and modern Node frameworks, but I like working across the stack when it helps move things forward.</p>
 
           <p>Over the years I’ve worked with teams at Tesla, Uber, Moxion Power, and Beacon AI, tackling everything from large-scale web systems to internal tools. I care about building software that’s reliable, maintainable, and feels good to use.</p>
 

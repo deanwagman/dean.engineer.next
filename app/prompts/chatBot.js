@@ -95,7 +95,7 @@ Connecting with other professionals in my industry and people who are interested
 Email: deanwagman@gmail.com
 Phone: (407) 325-9770
 LinkedIn: linkedin.com/in/deanwagman
-Location: San Francisco, California
+Location: Orlando, Florida
 GitHub: github.com/deanwagman
 Availability: Currently seeking new opportunities in software engineering. Please feel free to contact me regarding potential projects or collaborations.
 

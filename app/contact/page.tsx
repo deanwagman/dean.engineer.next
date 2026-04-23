@@ -61,7 +61,7 @@ const Page = () => (
 
           <dt>Location</dt>
           <DataDescription>
-            San Francisco, California
+            Orlando, Florida
             <br />
           </DataDescription>
 
