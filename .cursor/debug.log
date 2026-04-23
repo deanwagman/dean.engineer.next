@@ -403,3 +403,16 @@
 {"location":"resume/page.tsx:8","message":"Page component rendered","data":{},"timestamp":1767389034000,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
 {"location":"resume/page.tsx:8","message":"Page component rendered","data":{},"timestamp":1767390127798,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
 {"location":"resume/page.tsx:8","message":"Loading state rendered","data":{},"timestamp":1767390127804,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"resume/page.tsx:8","message":"Page component rendered","data":{},"timestamp":1767390739660,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"resume/page.tsx:8","message":"Dynamic import started","data":{},"timestamp":1767390739660,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"resume/page.tsx:8","message":"Loading state rendered","data":{},"timestamp":1767390739661,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"Resume/index.tsx:8","message":"Before resumeData import","data":{},"timestamp":1767390739787,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
+{"location":"Resume/index.tsx:8","message":"resumeData imported","data":{"hasData":true,"keys":["header","summary","skills","experience","education"]},"timestamp":1767390739788,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
+{"location":"resume/page.tsx:8","message":"Dynamic import success","data":{"hasDefault":true,"keys":["default"]},"timestamp":1767390739788,"sessionId":"debug-session","runId":"run1","hypothesisId":"A"}
+{"location":"Resume/index.tsx:8","message":"Resume component function called","data":{},"timestamp":1767390739788,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
+{"location":"Resume/index.tsx:8","message":"Rendering loading state (isClient=false)","data":{},"timestamp":1767390739788,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
+{"location":"Resume/index.tsx:8","message":"useEffect called, setting isClient to true","data":{},"timestamp":1767390739962,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
+{"location":"Resume/index.tsx:8","message":"Resume component function called","data":{},"timestamp":1767390739963,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
+{"location":"Resume/index.tsx:8","message":"Before destructuring resumeData","data":{"hasResumeData":true},"timestamp":1767390739963,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
+{"location":"Resume/index.tsx:8","message":"resumeData destructured successfully","data":{"hasHeader":true,"hasSummary":true,"hasSkills":true,"hasExperience":true,"hasEducation":true},"timestamp":1767390739963,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}
+{"location":"Resume/index.tsx:8","message":"Rendering main resume content","data":{},"timestamp":1767390739963,"sessionId":"debug-session","runId":"post-fix","hypothesisId":"B"}

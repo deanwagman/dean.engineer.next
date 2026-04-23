@@ -1,10 +1,15 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useRef } from "react";
 import { Navigation } from "../components/Nav";
 import { BackdropFilterProvider } from "../contexts/backdrop-filter";
-import FullscreenChatbot from "../components/Chat/FullscreenChat";
 import ClientOnly3D from "./ClientOnly3D";
+
+const FullscreenChatbot = dynamic(
+  () => import("../components/Chat/FullscreenChat"),
+  { ssr: false }
+);
 
 import backgroundImage from "../cyber-tower-background.jpg";
 

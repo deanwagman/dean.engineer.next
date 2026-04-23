@@ -51,6 +51,13 @@ const shouldSendMessages = (messages) => {
   return lastMessageSenderRole === "user";
 };
 
+const sizeFromWindowWidth = (windowWidth) => {
+  if (windowWidth < 690) return "sm";
+  if (windowWidth < 768) return "md";
+  if (windowWidth < 1400) return "lg";
+  return "xl";
+};
+
 const FullScreenChat = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isExited, setIsExited] = useState(false);
@@ -59,6 +66,10 @@ const FullScreenChat = () => {
   const messageContainerRef = useRef();
   const avatarRef = useRef();
   const isRequestingRef = useRef(false);
+  const isOpenRef = useRef(isOpen);
+  isOpenRef.current = isOpen;
+  const chatSpringRef = useRef(null);
+  const avatarSpringRef = useRef(null);
 
   const onEscape = (event) => {
     if (event.key === "Escape" && isOpen) {
@@ -68,6 +79,8 @@ const FullScreenChat = () => {
 
   const [messages, setMessages] = useState(defaultMessages);
   const [isRequesting, setIsRequesting] = useState(false);
+  /** Matches SSR (no window → width 0 → sm) until after mount; avoids hydration mismatch. */
+  const [layoutSize, setLayoutSize] = useState(() => sizeFromWindowWidth(0));
 
   const addUserMessage = (message) =>
     setMessages((prevMessages) => [...prevMessages, adaptUserMessage(message)]);
@@ -178,16 +191,7 @@ const FullScreenChat = () => {
     lg: 400,
     xl: 440,
   };
-  const windowWidth = typeof window !== "undefined" ? window.innerWidth : 0;
-  const size =
-    windowWidth < 690
-      ? "sm"
-      : windowWidth < 768
-      ? "md"
-      : windowWidth < 1400
-      ? "lg"
-      : "xl";
-  const chatWindowWidth = chatWindowWidths[size];
+  const chatWindowWidth = chatWindowWidths[layoutSize];
 
   const avatarWidths = {
     sm: 100,
@@ -195,7 +199,7 @@ const FullScreenChat = () => {
     lg: 150,
     xl: 200,
   };
-  const avatarWidth = avatarWidths[size];
+  const avatarWidth = avatarWidths[layoutSize];
 
   const [chatSpringProps, chatSpring] = useSpring(() => ({
     config: config.stiff,
@@ -210,7 +214,7 @@ const FullScreenChat = () => {
       padding: "1em",
       borderTopLeftRadius: "10rem",
       backgroundColor:
-        size === "sm" || size === "md"
+        layoutSize === "sm" || layoutSize === "md"
           ? "rgba(0, 0, 0, 0.3)"
           : "rgba(0, 0, 0, 0)",
       backdropFilter: "blur(3px)",
@@ -232,6 +236,8 @@ const FullScreenChat = () => {
       overflow: "hidden",
     },
   }));
+  chatSpringRef.current = chatSpring;
+  avatarSpringRef.current = avatarSpring;
   const [welcomeMessageSpringProps, welcomeMessageSpring] = useSpring(() => ({
     config: config.stiff,
     from: { opacity: 1 },
@@ -285,6 +291,29 @@ const FullScreenChat = () => {
   );
 
   useEffect(() => {
+    const updateLayoutSize = () => {
+      setLayoutSize(sizeFromWindowWidth(window.innerWidth));
+    };
+    updateLayoutSize();
+    window.addEventListener("resize", updateLayoutSize);
+    return () => window.removeEventListener("resize", updateLayoutSize);
+  }, []);
+
+  useEffect(() => {
+    const chat = chatSpringRef.current;
+    const avatar = avatarSpringRef.current;
+    if (!chat || !avatar) return;
+    chat.set({
+      translateX: isOpenRef.current ? 0 : chatWindowWidth,
+      backgroundColor:
+        layoutSize === "sm" || layoutSize === "md"
+          ? "rgba(0, 0, 0, 0.3)"
+          : "rgba(0, 0, 0, 0)",
+    });
+    avatar.set({ width: avatarWidth });
+  }, [layoutSize, chatWindowWidth, avatarWidth]);
+
+  useEffect(() => {
     const hasExited = localStorage.getItem("chatbot-exited");
     const hasEntered = Boolean(localStorage.getItem("chatbot-entered"));
     if (hasExited) {
@@ -308,7 +337,7 @@ const FullScreenChat = () => {
     };
   }, []);
 
-  // if (size === "sm" || size === "md") {
+  // if (layoutSize === "sm" || layoutSize === "md") {
   //   return null;
   // }
 
