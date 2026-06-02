@@ -8,19 +8,20 @@ import {
   View,
   StyleSheet,
 } from "@react-pdf/renderer";
-import { resumeData } from "./resumeData";
+import { resumeData } from "@/app/data/resumeData";
+import { formatJobMeta } from "@/app/data/resumeUtils";
 
 const styles = StyleSheet.create({
   page: {
-    padding: 35,
+    padding: 30,
     fontSize: 10,
     fontFamily: "Helvetica",
     color: "#000000",
   },
   header: {
-    marginBottom: 15,
+    marginBottom: 12,
     borderBottom: "2px solid #65000B",
-    paddingBottom: 8,
+    paddingBottom: 6,
   },
   name: {
     fontSize: 20,
@@ -34,31 +35,31 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#CD5C5C",
     textAlign: "center",
-    marginBottom: 8,
+    marginBottom: 6,
   },
   contact: {
-    fontSize: 10,
+    fontSize: 9,
     color: "#666666",
     textAlign: "center",
-    lineHeight: 1.5,
+    lineHeight: 1.4,
   },
   contactLine: {
-    marginBottom: 2,
+    marginBottom: 1,
   },
   section: {
-    marginBottom: 12,
+    marginBottom: 10,
   },
   sectionTitle: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: "bold",
     color: "#CD5C5C",
-    marginBottom: 6,
+    marginBottom: 5,
     borderBottom: "1px solid #F08080",
-    paddingBottom: 3,
+    paddingBottom: 2,
   },
   summaryText: {
     fontSize: 10,
-    lineHeight: 1.5,
+    lineHeight: 1.45,
     textAlign: "justify",
   },
   skillsContainer: {
@@ -67,51 +68,51 @@ const styles = StyleSheet.create({
   },
   skillCategory: {
     width: "48%",
-    marginBottom: 8,
+    marginBottom: 6,
     marginRight: "2%",
   },
   skillCategoryTitle: {
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: "bold",
     color: "#F08080",
-    marginBottom: 3,
+    marginBottom: 2,
   },
   skillText: {
-    fontSize: 10,
-    lineHeight: 1.4,
+    fontSize: 9,
+    lineHeight: 1.35,
   },
   jobContainer: {
-    marginBottom: 10,
+    marginBottom: 8,
   },
   jobTitle: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: "bold",
     color: "#65000B",
     marginBottom: 2,
   },
   jobCompany: {
-    fontSize: 10,
+    fontSize: 9,
     fontWeight: "bold",
     color: "#F08080",
-    marginBottom: 4,
+    marginBottom: 3,
   },
   bulletList: {
     marginLeft: 10,
-    marginTop: 4,
+    marginTop: 2,
   },
   bulletItem: {
-    fontSize: 10,
-    lineHeight: 1.4,
+    fontSize: 9,
+    lineHeight: 1.35,
     marginBottom: 2,
   },
   educationDegree: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: "bold",
     color: "#65000B",
-    marginBottom: 3,
+    marginBottom: 2,
   },
   educationSchool: {
-    fontSize: 10,
+    fontSize: 9,
     fontWeight: "bold",
     color: "#F08080",
   },
@@ -120,117 +121,46 @@ const styles = StyleSheet.create({
 const ResumePDF = () => {
   const { header, summary, skills, experience, education } = resumeData;
 
-  // Split experience into pages strategically
-  // Page 1: Header, Summary, Skills, first job only
-  // Page 2: Next 3 jobs
-  // Page 3: Remaining 3 jobs + Education
-
   return (
     <Document>
-      {/* Page 1: Header, Summary, Skills, First job */}
-      <Page size="LETTER" style={styles.page}>
-        {/* Header */}
+      <Page size="LETTER" style={styles.page} wrap>
         <View style={styles.header} wrap={false}>
           <Text style={styles.name}>{header.name}</Text>
           <Text style={styles.title}>{header.title}</Text>
           <View style={styles.contact}>
             <Text style={styles.contactLine}>
-              Email: {header.contact.email}
+              {header.contact.email} · {header.contact.phone}
             </Text>
             <Text style={styles.contactLine}>
-              Phone: {header.contact.phone}
+              {header.contact.website} · {header.contact.linkedin}
             </Text>
-            <Text style={styles.contactLine}>
-              Website: {header.contact.website}
-            </Text>
-            <Text style={styles.contactLine}>
-              Location: {header.contact.location}
-            </Text>
+            <Text style={styles.contactLine}>{header.contact.location}</Text>
           </View>
         </View>
 
-        {/* Professional Summary */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Professional Summary</Text>
           <Text style={styles.summaryText}>{summary}</Text>
         </View>
 
-        {/* Technical Skills */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Technical Skills</Text>
           <View style={styles.skillsContainer}>
-            <View style={styles.skillCategory}>
-              <Text style={styles.skillCategoryTitle}>Languages</Text>
-              <Text style={styles.skillText}>{skills.languages}</Text>
-            </View>
-            <View style={styles.skillCategory}>
-              <Text style={styles.skillCategoryTitle}>Frameworks</Text>
-              <Text style={styles.skillText}>{skills.frameworks}</Text>
-            </View>
-            <View style={styles.skillCategory}>
-              <Text style={styles.skillCategoryTitle}>Databases</Text>
-              <Text style={styles.skillText}>{skills.databases}</Text>
-            </View>
-            <View style={styles.skillCategory}>
-              <Text style={styles.skillCategoryTitle}>Cloud & Tools</Text>
-              <Text style={styles.skillText}>{skills.cloudTools}</Text>
-            </View>
+            {skills.map(({ category, items }) => (
+              <View key={category} style={styles.skillCategory}>
+                <Text style={styles.skillCategoryTitle}>{category}</Text>
+                <Text style={styles.skillText}>{items}</Text>
+              </View>
+            ))}
           </View>
         </View>
 
-        {/* Professional Experience - First job only */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Professional Experience (continued on next page)</Text>
-          {experience.slice(0, 1).map((job, index) => (
-            <View key={index} style={styles.jobContainer}>
+        <View style={styles.section} break>
+          <Text style={styles.sectionTitle}>Professional Experience</Text>
+          {experience.map((job, index) => (
+            <View key={index} style={styles.jobContainer} wrap={false}>
               <Text style={styles.jobTitle}>{job.title}</Text>
-              <Text style={styles.jobCompany}>
-                {job.company} | {job.location} | {job.period}
-              </Text>
-              <View style={styles.bulletList}>
-                {job.bullets.map((bullet, bulletIndex) => (
-                  <Text key={bulletIndex} style={styles.bulletItem}>
-                    • {bullet}
-                  </Text>
-                ))}
-              </View>
-            </View>
-          ))}
-        </View>
-      </Page>
-
-      {/* Page 2: Next 3 jobs */}
-      <Page size="LETTER" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Professional Experience (continued)</Text>
-          {experience.slice(1, 4).map((job, index) => (
-            <View key={index + 1} style={styles.jobContainer}>
-              <Text style={styles.jobTitle}>{job.title}</Text>
-              <Text style={styles.jobCompany}>
-                {job.company} | {job.location} | {job.period}
-              </Text>
-              <View style={styles.bulletList}>
-                {job.bullets.map((bullet, bulletIndex) => (
-                  <Text key={bulletIndex} style={styles.bulletItem}>
-                    • {bullet}
-                  </Text>
-                ))}
-              </View>
-            </View>
-          ))}
-        </View>
-      </Page>
-
-      {/* Page 3: Remaining 3 jobs + Education */}
-      <Page size="LETTER" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Professional Experience (continued)</Text>
-          {experience.slice(4).map((job, index) => (
-            <View key={index + 4} style={styles.jobContainer}>
-              <Text style={styles.jobTitle}>{job.title}</Text>
-              <Text style={styles.jobCompany}>
-                {job.company} | {job.location} | {job.period}
-              </Text>
+              <Text style={styles.jobCompany}>{formatJobMeta(job)}</Text>
               <View style={styles.bulletList}>
                 {job.bullets.map((bullet, bulletIndex) => (
                   <Text key={bulletIndex} style={styles.bulletItem}>
@@ -242,8 +172,7 @@ const ResumePDF = () => {
           ))}
         </View>
 
-        {/* Education */}
-        <View style={styles.section}>
+        <View style={styles.section} wrap={false}>
           <Text style={styles.sectionTitle}>Education</Text>
           <Text style={styles.educationDegree}>{education.degree}</Text>
           <Text style={styles.educationSchool}>
@@ -256,4 +185,3 @@ const ResumePDF = () => {
 };
 
 export default ResumePDF;
-

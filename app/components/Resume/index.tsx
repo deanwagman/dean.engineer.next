@@ -9,7 +9,8 @@ import React, { useState, useEffect } from "react";
 // #region agent log
 log('Before resumeData import', {});
 // #endregion
-import { resumeData } from "./resumeData";
+import { resumeData } from "@/app/data/resumeData";
+import { formatJobMeta } from "@/app/data/resumeUtils";
 // #region agent log
 log('resumeData imported', { hasData: !!resumeData, keys: resumeData ? Object.keys(resumeData) : [] });
 // #endregion
@@ -132,6 +133,7 @@ const Resume = () => {
             <p>📧 {header.contact.email}</p>
             <p>📱 {header.contact.phone}</p>
             <p>🌐 {header.contact.website}</p>
+            <p>🔗 {header.contact.linkedin}</p>
             <p>📍 {header.contact.location}</p>
           </div>
         </div>
@@ -152,22 +154,12 @@ const Resume = () => {
             Technical Skills
           </h3>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem" }}>
-            <div>
-              <h4 style={{ fontSize: "1.2rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>Languages</h4>
-              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>{skills.languages}</p>
-            </div>
-            <div>
-              <h4 style={{ fontSize: "1.2rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>Frameworks</h4>
-              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>{skills.frameworks}</p>
-            </div>
-            <div>
-              <h4 style={{ fontSize: "1.2rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>Databases</h4>
-              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>{skills.databases}</p>
-            </div>
-            <div>
-              <h4 style={{ fontSize: "1.2rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>Cloud & Tools</h4>
-              <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>{skills.cloudTools}</p>
-            </div>
+            {skills.map(({ category, items }) => (
+              <div key={category}>
+                <h4 style={{ fontSize: "1.2rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>{category}</h4>
+                <p style={{ fontSize: "1rem", lineHeight: "1.5" }}>{items}</p>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -182,7 +174,7 @@ const Resume = () => {
                 {job.title}
               </h4>
               <p style={{ fontSize: "1rem", color: "#F08080", marginBottom: "0.5rem", fontWeight: "bold" }}>
-                {job.company} | {job.location} | {job.period}
+                {formatJobMeta(job)}
               </p>
               <ul style={{ fontSize: "1rem", lineHeight: "1.6", marginLeft: "1rem" }}>
                 {job.bullets.map((bullet, bulletIndex) => (
