@@ -53,7 +53,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
-    "markdown-to-jsx": "^7.2.0"
+    "markdown-to-jsx": "^9.8.1"
   },
   "overrides": {
     "@types/react": "18.3.12",
