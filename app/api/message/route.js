@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
-import { createParser } from "eventsource-parser";
 import { RateLimiter } from "limiter";
 
 const tokensPerInterval = 20;
@@ -11,10 +10,20 @@ const limiter = new RateLimiter({
   fireImmediately: true,
 });
 
-// Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let openaiClient;
+
+function getOpenAI() {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) {
+    return null;
+  }
+
+  if (!openaiClient) {
+    openaiClient = new OpenAI({ apiKey });
+  }
+
+  return openaiClient;
+}
 
 const agentPersonality = `
 Visual Description:
@@ -34,7 +43,6 @@ export async function POST(request, response) {
   }));
 
   const encoder = new TextEncoder();
-  const decoder = new TextDecoder();
 
   if (remainingTokens < 1) {
     return NextResponse.json({
@@ -43,6 +51,14 @@ export async function POST(request, response) {
   }
 
   try {
+    const openai = getOpenAI();
+    if (!openai) {
+      return NextResponse.json(
+        { error: "Chat is not configured. OPENAI_API_KEY is missing." },
+        { status: 503 }
+      );
+    }
+
     // Use the new Responses API with GPT-5
     const stream = await openai.responses.create({
       model: "gpt-5",
